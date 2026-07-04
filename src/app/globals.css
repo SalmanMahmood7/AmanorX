@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+/*
+ * AmanorX brand tokens.
+ * Navy/Green/Silver per brand direction. Silver (#C0C0C0) is a monogram/accent
+ * colour only -- it does not meet AA contrast for body text on either surface,
+ * so a darker "silver-ink" variant exists for text use and the raw silver stays
+ * reserved for accents, borders, and the monogram.
+ *
+ * navy-50/100 are tints of navy-900, not new hues -- they replace the old
+ * `bg-navy-900/[0.03]` opacity hacks with a flat, printable surface colour so
+ * borders/shadows sit on top cleanly. green-50 is the equivalent tint of
+ * green-500 for accent chips/backgrounds.
+ */
+:root {
+  --color-navy-950: #060d17;
+  --color-navy-900: #0d1a2e;
+  --color-navy-800: #142440;
+  --color-navy-700: #1c3255;
+  --color-navy-600: #2a4570;
+  --color-navy-100: #e7eaf1;
+  --color-navy-50: #f4f6f9;
+
+  --color-green-600: #007a4f;
+  --color-green-500: #008f5d;
+  --color-green-400: #17a873;
+  --color-green-50: #eaf8f2;
+
+  --color-silver-300: #e4e4e4;
+  --color-silver-400: #c0c0c0;
+  --color-silver-ink: #5b6472; /* AA-safe body text derived from silver, not the raw accent value */
+
+  --background: #ffffff;
+  --foreground: var(--color-navy-900);
+
+  /* Minimal elevation used only on small pill/tab affordances (active filter
+     chip, segmented control) -- everything else in this design uses borders
+     and rules for hierarchy, not soft shadows. */
+  --shadow-card: 0 1px 2px rgba(13, 26, 46, 0.08), 0 1px 3px rgba(13, 26, 46, 0.06);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-navy-950: var(--color-navy-950);
+  --color-navy-900: var(--color-navy-900);
+  --color-navy-800: var(--color-navy-800);
+  --color-navy-700: var(--color-navy-700);
+  --color-navy-600: var(--color-navy-600);
+  --color-navy-100: var(--color-navy-100);
+  --color-navy-50: var(--color-navy-50);
+
+  --color-green-600: var(--color-green-600);
+  --color-green-500: var(--color-green-500);
+  --color-green-400: var(--color-green-400);
+  --color-green-50: var(--color-green-50);
+
+  --color-silver-300: var(--color-silver-300);
+  --color-silver-400: var(--color-silver-400);
+  --color-silver-ink: var(--color-silver-ink);
+
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+
+  --shadow-card: var(--shadow-card);
+
+  --ease-out-expo: var(--ease-out-expo);
+
+  /* Fluid, editorial type scale -- shared across every page hero/heading so
+     hierarchy reads the same site-wide instead of each page picking its own
+     text-4xl/text-2xl ad hoc. */
+  --text-display: clamp(2.75rem, 2.1rem + 2.6vw, 4.5rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.02em;
+
+  --text-h1: clamp(2.25rem, 1.9rem + 1.5vw, 3rem);
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.015em;
+
+  --text-h2: clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: -0.01em;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Display face for the About section's large heading and stat-card values.
+   No 'TT Firs Neue' font file is licensed/available to self-host, so the
+   stack's own fallback (Inter, then system-ui) is what actually renders --
+   declared here so the class is a no-op today and picks up the real face
+   automatically if one is added later. */
+.font-firs {
+  font-family: "TT Firs Neue", "Inter", system-ui, sans-serif;
+}
+
+/* Glass navbar / hero chrome treatment, used by <Header> and the homepage
+   hero's secondary CTA + bottom-right tag. Left unlayered on purpose so it
+   reliably sits above the video background regardless of Tailwind's
+   internal cascade layers. */
+.liquid-glass {
+  background: rgba(0, 0, 0, 0.4);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.1) 80%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Hover state for the liquid-glass secondary hero CTA -- kept as its own
+   unlayered rule (rather than a Tailwind hover: utility) since a layered
+   Tailwind utility can never win a same-specificity fight against the
+   unlayered .liquid-glass background above. */
+.liquid-glass-button {
+  transition:
+    background-color 200ms ease,
+    color 200ms ease;
+}
+.liquid-glass-button:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Scroll-reveal primitive used by <Reveal>. Only "pending" (pre-observation)
+   elements start hidden; the moment IntersectionObserver fires, state flips
+   to "visible". Scripting-disabled browsers and reduced-motion users get the
+   content immediately (see guards below) so this never hides content from a
+   no-JS visitor or a crawler that doesn't run the observer callback. */
+[data-reveal] {
+  transition:
+    opacity 0.5s var(--ease-out-expo),
+    transform 0.5s var(--ease-out-expo);
+}
+
+[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+[data-reveal="visible"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (scripting: none) {
+  [data-reveal="pending"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Scroll-tied path: on browsers with CSS scroll-driven animations, <Reveal>
+   sets data-reveal="scroll" and steps out of the way entirely -- opacity and
+   transform are driven by the element's own scroll position via
+   animation-timeline, not by a one-shot JS-toggled class. This is what
+   produces the Apple-product-page feel (motion tracks scroll, not just
+   "entered viewport once"). */
+@supports (animation-timeline: view()) {
+  @keyframes reveal-on-scroll {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  [data-reveal="scroll"] {
+    animation: reveal-on-scroll linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+}
+
+/* Respect reduced-motion preference sitewide; components add transitions opt-in. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal="pending"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  [data-reveal="scroll"] {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
