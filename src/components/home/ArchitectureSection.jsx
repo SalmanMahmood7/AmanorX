@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import Button from "@/components/shared/Button";
 import Container from "@/components/shared/Container";
 import Reveal from "@/components/shared/Reveal";
+import AnimatedHeading from "@/components/home/AnimatedHeading";
 
 // Three-tier architecture as a cascade diagram rather than three equal
 // cards: each tier row widens as you descend (one parent -> sector
@@ -69,15 +70,23 @@ export default function ArchitectureSection({ heading, intro, cta, tiers, scales
     <section className="bg-navy-950 py-16 sm:py-20">
       <Container size="xl">
         <Reveal>
-          <span className="block h-px w-10 bg-green-500" aria-hidden="true" />
-          <h2 className="mt-4 text-h2 font-semibold text-white">{heading}</h2>
+          <AnimatedHeading
+            startOnView
+            as="h2"
+            text={heading}
+            className="text-h2 font-semibold text-white"
+          />
           <p className="mt-3 max-w-2xl text-white/70">{intro}</p>
         </Reveal>
 
         <div className="mt-12 flex flex-col items-center">
           {tiers.map((tier, i) => (
             <Fragment key={tier.id}>
-              {i > 0 ? <TierConnector /> : null}
+              {i > 0 ? (
+                <Reveal effect="scale">
+                  <TierConnector />
+                </Reveal>
+              ) : null}
               <Reveal delay={i * 80} className={`w-full ${ROW_WIDTHS[i] ?? ""}`}>
                 <TierRow tier={tier} scale={scales[i]} />
               </Reveal>

@@ -8,8 +8,9 @@ const steps = pick(emmicSteps);
 
 /**
  * Five-part click-through EMMIC sequence (Evaluation -> Management ->
- * Marketplace -> Investment -> Company). ARIA tabs pattern plus Prev/Next
- * controls for the "click-through sequence" feel the brief asks for.
+ * Marketplace -> Investment -> Company). ARIA tabs pattern -- the letter
+ * tabs (click or arrow keys) are the only navigation; the old Prev/Next
+ * footer row was removed per explicit instruction.
  *
  * `headingLevel` lets the parent page control heading hierarchy.
  */
@@ -34,7 +35,7 @@ export default function EmmicWalkthrough({ headingLevel = 3 }) {
         role="tablist"
         aria-label="The EMMIC sequence"
         onKeyDown={onKeyDown}
-        className="flex flex-wrap gap-2"
+        className="flex flex-wrap justify-center gap-2"
       >
         {steps.map((step, index) => {
           const selected = index === activeIndex;
@@ -74,7 +75,7 @@ export default function EmmicWalkthrough({ headingLevel = 3 }) {
           role="tabpanel"
           aria-labelledby={`emmic-tab-${step.id}`}
           hidden={index !== activeIndex}
-          className="mt-6 border border-t-2 border-navy-900/10 border-t-green-500 bg-white p-6 sm:p-7"
+          className="mx-auto mt-6 max-w-2xl rounded-lg border border-t-2 border-navy-900/10 border-t-green-500 bg-white p-6 text-center sm:p-7"
         >
           <HeadingTag className="text-lg font-semibold text-navy-900">
             {step.letter} &mdash; {step.name}
@@ -86,25 +87,6 @@ export default function EmmicWalkthrough({ headingLevel = 3 }) {
         </div>
       ))}
 
-      <div className="mt-4 flex items-center justify-between text-sm">
-        <button
-          type="button"
-          onClick={() => goTo(activeIndex - 1)}
-          className="cursor-pointer rounded-full border border-navy-900/15 px-4 py-1.5 font-medium text-navy-900 transition-colors hover:border-green-500 hover:text-green-600"
-        >
-          &larr; Previous
-        </button>
-        <span className="text-silver-ink">
-          {activeIndex + 1} of {steps.length}
-        </span>
-        <button
-          type="button"
-          onClick={() => goTo(activeIndex + 1)}
-          className="cursor-pointer rounded-full border border-navy-900/15 px-4 py-1.5 font-medium text-navy-900 transition-colors hover:border-green-500 hover:text-green-600"
-        >
-          Next &rarr;
-        </button>
-      </div>
     </div>
   );
 }

@@ -30,14 +30,14 @@ function pageEntries() {
       type: "Page",
       title: "The Architecture",
       description:
-        "AmanorX is organised as a three-tier structure, and every sector platform runs the same five-part EMMIC discipline.",
+        "AmanorX is organized as a three tier structure, and every sector platform runs the same five part EMMIC discipline.",
       href: "/architecture",
     },
     {
       type: "Page",
       title: "Sectors",
       description:
-        "AmanorX operates across the EMMIC architecture's 16 sectors, each at a different stage of build-out.",
+        "AmanorX operates across the EMMIC architecture's 16 sectors, each at a different stage of build out.",
       href: "/sectors",
     },
     {

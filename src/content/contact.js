@@ -7,25 +7,25 @@ export const contactContent = {
   en: {
     heading: "Contact",
     intro:
-      "Route your inquiry to the right team. Investor, partnership, and general inquiries go to different places -- pick the one that fits.",
+      "Route your inquiry to the right team. Investor, partnership, and general inquiries go to different places, pick the one that fits.",
     paths: [
       {
         id: "investor",
         reason: "investor",
         heading: "Investor Inquiries",
-        body: "Placeholder copy: for diligence requests, valuation-access requests, or anything investor relations.",
+        body: "For diligence requests, valuation access requests, or anything investor relations.",
       },
       {
         id: "partnership",
         reason: "partnership",
         heading: "Partnership Inquiries",
-        body: "Placeholder copy: for sector partnerships, ventures, or commercial collaboration with AmanorX or a sector platform.",
+        body: "For sector partnerships, ventures, or commercial collaboration with AmanorX or a sector platform.",
       },
       {
         id: "general",
         reason: "general",
         heading: "General Contact",
-        body: "Placeholder copy: for press, careers, or anything that doesn't fit the categories above.",
+        body: "For press, careers, or anything that doesn't fit the categories above.",
       },
     ],
   },

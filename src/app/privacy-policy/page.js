@@ -1,4 +1,5 @@
 import PageShell from "@/components/shared/PageShell";
+import Reveal from "@/components/shared/Reveal";
 import SectionHeading from "@/components/shared/SectionHeading";
 
 export const metadata = {
@@ -16,7 +17,7 @@ export default function PrivacyPolicyPage() {
       heading="Privacy Policy"
       description="This page is a placeholder pending legal review -- it is not yet AmanorX's binding privacy policy."
     >
-      <section>
+      <Reveal as="section">
         <SectionHeading>Status</SectionHeading>
         <p className="mt-4 max-w-2xl text-navy-700">
           AmanorX Holdings has not yet published a legally reviewed privacy policy. When one
@@ -32,7 +33,7 @@ export default function PrivacyPolicyPage() {
           </a>{" "}
           page.
         </p>
-      </section>
+      </Reveal>
     </PageShell>
   );
 }

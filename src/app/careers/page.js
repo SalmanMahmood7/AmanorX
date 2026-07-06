@@ -1,4 +1,6 @@
 import PageShell from "@/components/shared/PageShell";
+import Reveal from "@/components/shared/Reveal";
+import AnimatedHeading from "@/components/home/AnimatedHeading";
 import SectionHeading from "@/components/shared/SectionHeading";
 import Button from "@/components/shared/Button";
 import { careersContent } from "@/content/careers";
@@ -23,18 +25,24 @@ export default function CareersPage() {
       reference="AMX / 08"
       sections={SECTIONS}
     >
-      <section id="group-roles" className="scroll-mt-28">
+      <Reveal as="section" id="group-roles" className="scroll-mt-28">
         <SectionHeading>{content.groupRolesHeading}</SectionHeading>
         <div className="mt-4 border border-dashed border-navy-900/20 bg-navy-50/60 p-6 sm:p-7">
           <p className="text-sm text-silver-ink">{content.groupRolesEmptyState}</p>
         </div>
-      </section>
+      </Reveal>
 
-      <section
+      <Reveal
+        as="section"
         id="pipeline"
         className="scroll-mt-28 border-l-4 border-green-500 bg-navy-900 p-8 text-white sm:p-10"
       >
-        <h2 className="text-h2 font-semibold">{content.pipeline.heading}</h2>
+        <AnimatedHeading
+          startOnView
+          as="h2"
+          text={content.pipeline.heading}
+          className="text-h2 font-semibold"
+        />
         <p className="mt-3 max-w-2xl text-lg text-white/80">{content.pipeline.body}</p>
         <Button
           href={content.pipeline.cta.href}
@@ -45,7 +53,7 @@ export default function CareersPage() {
         >
           {content.pipeline.cta.label}
         </Button>
-      </section>
+      </Reveal>
     </PageShell>
   );
 }

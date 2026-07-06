@@ -24,6 +24,11 @@ export default function SectorCard({ sector }) {
       <p className="mt-3 text-sm leading-relaxed text-navy-700">
         {sector.description}
       </p>
+      {sector.disclaimer ? (
+        <p className="mt-3 text-xs leading-relaxed text-silver-ink italic">
+          {sector.disclaimer}
+        </p>
+      ) : null}
     </>
   );
 
@@ -33,7 +38,7 @@ export default function SectorCard({ sector }) {
         href={sector.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="group block border border-t-2 border-navy-900/15 border-t-green-500 bg-white p-6 transition-colors duration-300 hover:bg-navy-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 sm:p-7"
+        className="group block rounded-lg border border-t-2 border-navy-900/15 border-t-green-500 bg-white p-6 transition-colors duration-300 hover:bg-navy-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500 sm:p-7"
       >
         {body}
         <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-green-600">
@@ -50,7 +55,7 @@ export default function SectorCard({ sector }) {
   }
 
   return (
-    <div className="border border-t-2 border-dashed border-navy-900/15 border-t-navy-900/25 bg-navy-50/60 p-6 sm:p-7">
+    <div className="rounded-lg border border-t-2 border-dashed border-navy-900/15 border-t-navy-900/25 bg-white/70 p-6 sm:p-7">
       {body}
       <span className="mt-5 inline-block text-sm font-medium text-silver-ink">
         Coming soon

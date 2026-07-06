@@ -13,25 +13,25 @@ export const valuationInvestorsContent = {
   en: {
     heading: "Valuation & Investors",
     intro:
-      "Diligence-grade transparency, gated where appropriate. This page explains how AmanorX structures valuation across the group -- the figures themselves are shared under request, not published here.",
+      "Diligence ready transparency, gated where appropriate. This page explains how AmanorX structures valuation across the group. The figures themselves are shared under request, not published here.",
     layers: [
       {
         id: "layer-1",
         label: "Layer 1",
         name: "Group",
-        body: "Placeholder copy: the consolidated view across AmanorX Holdings -- how the group's sector platforms and operating companies roll up into a single institutional valuation.",
+        body: "The consolidated view across AmanorX Holdings: how the group's sector platforms and operating companies roll up into a single institutional valuation.",
       },
       {
         id: "layer-2",
         label: "Layer 2",
         name: "Sector Platforms",
-        body: "Placeholder copy: each live sector platform is assessed on its own EMMIC-cycle performance before it contributes to the group-level figure.",
+        body: "Each live sector platform is assessed on its own EMMIC cycle performance before it contributes to the group figure.",
       },
       {
         id: "layer-3",
         label: "Layer 3",
         name: "Operating Companies",
-        body: "Placeholder copy: the underlying Tier-3 companies -- the operating businesses whose performance ultimately anchors every figure above them.",
+        body: "The underlying Tier 3 companies, the operating businesses whose performance ultimately anchors every figure above them.",
       },
     ],
     figures: {
@@ -41,13 +41,13 @@ export const valuationInvestorsContent = {
       items: [
         {
           id: "figure-group",
-          label: "Group-level figure",
+          label: "Group level figure",
           anchor:
             "Anchored at the Layer 1 (Group) consolidation, independently reviewed.",
         },
         {
           id: "figure-sector",
-          label: "Sector-level figure",
+          label: "Sector level figure",
           anchor:
             "Anchored at the Layer 2 (Sector Platform) level for the group's live sectors, independently reviewed.",
         },

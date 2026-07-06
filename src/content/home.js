@@ -51,6 +51,8 @@ export const homeContent = {
       tomorrowHeading: "Future Direction",
       tomorrowIntro:
         "Toward the 2030s, AmanorX intends to operate across all 16 EMMIC sectors. The sectors below are scoped on the group's roadmap but not yet live.",
+      ctaSectors: { label: "Explore All Sectors", href: "/sectors" },
+      ctaPortfolio: { label: "Our Initiatives & Portfolio", href: "/portfolio" },
     },
 
     // Condensed to 3 cards (2 topics folded per card) to fit a supplied
@@ -83,35 +85,6 @@ export const homeContent = {
       description:
         "A running record of press mentions, milestones, and sector launches as they happen, not a static claim about them.",
       cta: { label: "View All News", href: "/insights" },
-    },
-
-    careersSection: {
-      heading: "Build Your Future With AmanorX",
-      description:
-        "AmanorX is built by people, not just capital. Roles at group level are posted when open; most daily hiring happens inside individual sector platforms and portfolio companies.",
-      highlights: [
-        {
-          icon: "target",
-          title: "Professional Growth",
-          description: "Roles across sector platforms as they go live, not just at group level.",
-        },
-        {
-          icon: "spark",
-          title: "Learning Opportunities",
-          description: "Exposure to the same evaluation, management, and governance discipline used across the group.",
-        },
-        {
-          icon: "users",
-          title: "Company Culture",
-          description: "Institutional patience over short term momentum, at every level of the group.",
-        },
-        {
-          icon: "pulse",
-          title: "Career Development",
-          description: "A talent pipeline run through Prepreneurship, the group's own Tier 3 venture.",
-        },
-      ],
-      cta: { label: "Explore Careers", href: "/careers" },
     },
   },
 };

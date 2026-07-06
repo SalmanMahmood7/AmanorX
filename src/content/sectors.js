@@ -1,23 +1,22 @@
-// EMMIC sector registry -- Phase 1 placeholder data.
+// EMMIC sector registry -- reflects AmanorX's real group architecture chart
+// (16 sectors, three-way status split) rather than earlier Phase 1 guesses.
+// Sector code/name/status assignments below are sourced directly from that
+// chart; taglines and the longer per-sector descriptions are still this
+// build's own placeholder wording pending confirmed marketing copy per
+// sector -- swap the `.example` TLD for real Tier 2 domains once each live
+// sector's site exists.
 //
-// TODO(AmanorX): This entire file is a placeholder. Real inputs pending:
-//   - Confirmed list of which sectors are actually live and their real URLs
-//     (all `url` values below use the `.example` TLD, which is reserved by
-//     RFC 2606 and will never resolve -- swap for real Tier 2 domains later)
-//   - Confirmed sector codes/names and which of the 16 are truly LIVE today
-//     vs PIPELINE/PLANNED (this file guesses a plausible 6/5/5 split)
-//   - Real descriptive copy per sector (current copy is deliberately generic)
+// This array is the "source of truth" content layer. It is only ever read
+// through src/lib/data/sectors.js -- never import this file directly from a
+// page or component. That indirection is what lets this become a
+// Sanity/Contentful fetch later without touching call sites.
 //
-// This array is the "source of truth" content layer for Phase 1. It is only
-// ever read through src/lib/data/sectors.js -- never import this file
-// directly from a page or component. That indirection is what lets this
-// become a Sanity/Contentful fetch later without touching call sites.
-//
-// IMPORTANT CONTENT REMINDER: DEMMIC (Defence & Strategic Industries) and
-// AVEMMIC (Aviation & Aerospace) copy must stay conservative. Do not imply
-// government access, defence influence, or any preferential mandate for
-// AmanorX, its board, advisors, or these entities. Keep descriptions
-// generic and capability-focused, not contract- or access-focused.
+// IMPORTANT CONTENT REMINDER: DEMMIC (Defense) copy must stay conservative.
+// Do not imply government access, defense influence, or any preferential
+// mandate for AmanorX, its board, advisors, or this entity. Keep
+// descriptions generic and capability-focused, not contract- or
+// access-focused, even though the sector is named plainly per the real
+// chart.
 
 import { SECTOR_STATUS } from "./constants";
 
@@ -25,165 +24,170 @@ export const sectors = [
   {
     slug: "remmic",
     code: "REMMIC",
-    name: "Real Estate & Infrastructure",
+    name: "Real Estate",
     status: SECTOR_STATUS.LIVE,
-    tagline: "Land, development, and long-horizon infrastructure assets.",
+    tagline: "Real estate development and property ventures.",
     description:
-      "Placeholder copy: covers evaluation, development, and management of real estate and infrastructure assets across the group's target markets.",
+      "Covers evaluation, development, and management of real estate assets across the group's target markets.",
     url: "https://remmic.amanorx.example",
   },
   {
     slug: "temmic",
     code: "TEMMIC",
-    name: "Technology & Digital Platforms",
+    name: "Technology",
     status: SECTOR_STATUS.LIVE,
     tagline: "Software, platforms, and digital infrastructure ventures.",
     description:
-      "Placeholder copy: technology ventures evaluated, built, and scaled under the group's operating model.",
+      "Technology ventures evaluated, built, and scaled under the group's operating model.",
     url: "https://temmic.amanorx.example",
   },
   {
-    slug: "xemmic",
-    code: "XEMMIC",
-    name: "Exchange & Trade",
+    slug: "memmic",
+    code: "MEMMIC",
+    name: "Media",
     status: SECTOR_STATUS.LIVE,
-    tagline: "Cross-border trade, marketplaces, and exchange infrastructure.",
+    tagline: "Media, content, and creative production ventures.",
     description:
-      "Placeholder copy: marketplace and trade-facilitation ventures connecting buyers, sellers, and capital across sectors.",
-    url: "https://xemmic.amanorx.example",
+      "Media and creative ventures spanning content production, marketing, and distribution.",
+    url: "https://memmic.amanorx.example",
   },
   {
-    slug: "femmic",
-    code: "FEMMIC",
-    name: "Financial Services",
+    slug: "acemmic",
+    code: "ACEMMIC",
+    name: "Academic & Education",
     status: SECTOR_STATUS.LIVE,
-    tagline: "Fintech, capital access, and financial infrastructure.",
+    tagline: "Academic institutions and education technology ventures.",
     description:
-      "Placeholder copy: financial services ventures spanning payments, lending, and capital-markets infrastructure.",
-    url: "https://femmic.amanorx.example",
+      "Education and EdTech ventures spanning training, placement, and academic delivery.",
+    url: "https://acemmic.amanorx.example",
   },
   {
-    slug: "aemmic",
-    code: "AEMMIC",
-    name: "Agriculture & Agri Processing",
+    slug: "themmic",
+    code: "THEMMIC",
+    name: "Tourism",
     status: SECTOR_STATUS.LIVE,
-    tagline: "Primary agriculture through to processed agri-output.",
+    tagline: "Tourism, hospitality, and travel ventures.",
     description:
-      "Placeholder copy: agricultural production and processing ventures aimed at yield and supply-chain resilience.",
-    url: "https://aemmic.amanorx.example",
+      "Hospitality and travel ventures spanning accommodation, tourism services, and travel booking.",
+    url: "https://themmic.amanorx.example",
   },
   {
-    slug: "hemmic",
-    code: "HEMMIC",
-    name: "Healthcare & Life Sciences",
+    slug: "cemmic",
+    code: "CEMMIC",
+    name: "Commerce",
     status: SECTOR_STATUS.LIVE,
-    tagline: "Care delivery, diagnostics, and life-sciences ventures.",
+    tagline: "Commerce and marketplace ventures.",
     description:
-      "Placeholder copy: healthcare and life-sciences ventures across care delivery and supporting infrastructure.",
-    url: "https://hemmic.amanorx.example",
+      "Marketplace and commerce ventures connecting buyers, sellers, and capital across sectors.",
+    url: "https://cemmic.amanorx.example",
   },
   {
     slug: "eemmic",
     code: "EEMMIC",
-    name: "Energy & Power",
+    name: "Energy",
     status: SECTOR_STATUS.PIPELINE,
-    tagline: "Generation, distribution, and energy transition ventures.",
+    tagline: "Energy generation, distribution, and transition ventures.",
     description:
-      "Placeholder copy: energy sector platform in active build-out; not yet public.",
+      "Energy sector platform in active build out; not yet public.",
+    url: null,
+  },
+  {
+    slug: "femmic",
+    code: "FEMMIC",
+    name: "Financial",
+    status: SECTOR_STATUS.PIPELINE,
+    tagline: "Fintech, capital access, and financial infrastructure.",
+    description:
+      "Financial services sector platform in active build out; not yet public.",
     url: null,
   },
   {
     slug: "lemmic",
     code: "LEMMIC",
-    name: "Logistics & Supply Chain",
+    name: "Logistics",
     status: SECTOR_STATUS.PIPELINE,
-    tagline: "Freight, warehousing, and supply-chain infrastructure.",
+    tagline: "Freight, warehousing, and supply chain ventures.",
     description:
-      "Placeholder copy: logistics sector platform in active build-out; not yet public.",
+      "Logistics sector platform in active build out; not yet public.",
     url: null,
   },
   {
-    slug: "memmic",
-    code: "MEMMIC",
-    name: "Manufacturing & Industrial",
+    slug: "lsemmic",
+    code: "LSEMMIC",
+    name: "Lifestyle",
     status: SECTOR_STATUS.PIPELINE,
-    tagline: "Industrial production and manufacturing capability.",
+    tagline: "Lifestyle, retail, and consumer ventures.",
     description:
-      "Placeholder copy: manufacturing sector platform in active build-out; not yet public.",
+      "Lifestyle and consumer sector platform in active build out; not yet public.",
     url: null,
   },
   {
-    slug: "cemmic",
-    code: "CEMMIC",
-    name: "Construction & Infrastructure Development",
-    status: SECTOR_STATUS.PIPELINE,
-    tagline: "Contracting, materials, and infrastructure delivery.",
+    slug: "hemmic",
+    code: "HEMMIC",
+    name: "Healthcare",
+    status: SECTOR_STATUS.PLANNED,
+    tagline: "Healthcare and life sciences ventures.",
     description:
-      "Placeholder copy: construction sector platform in active build-out; not yet public.",
-    url: null,
-  },
-  {
-    slug: "demmic",
-    code: "DEMMIC",
-    name: "Strategic & Advanced Industries",
-    status: SECTOR_STATUS.PIPELINE,
-    tagline: "Advanced and dual-use industrial capability.",
-    // Conservative by design -- see file-level reminder above. Do not
-    // reference government contracts, defence procurement, or access.
-    description:
-      "Placeholder copy: an advanced-industrial capability sector platform in active build-out; not yet public.",
+      "A healthcare and life sciences sector platform on the group's roadmap; work has not started.",
     url: null,
   },
   {
     slug: "avemmic",
     code: "AVEMMIC",
-    name: "Aviation & Aerospace",
+    name: "Aviation",
     status: SECTOR_STATUS.PLANNED,
-    tagline: "Aviation services and aerospace-adjacent ventures.",
+    tagline: "Aviation services and aerospace adjacent ventures.",
+    description:
+      "An aviation and aerospace sector platform on the group's roadmap; work has not started.",
+    // Displayed disclaimer required by the developer brief (§7) for
+    // AVEMMIC and DEMMIC -- rendered wherever this sector's description
+    // appears, not just kept as an internal note.
+    disclaimer:
+      "No claim of government access, influence, or preferential mandate is made or implied.",
+    url: null,
+  },
+  {
+    slug: "demmic",
+    code: "DEMMIC",
+    name: "Defense",
+    status: SECTOR_STATUS.PLANNED,
+    tagline: "Advanced and strategic industrial capability.",
     // Conservative by design -- see file-level reminder above. Do not
-    // reference government contracts, defence procurement, or access.
+    // reference government contracts, defense procurement, or access.
     description:
-      "Placeholder copy: an aviation and aerospace sector platform on the group's roadmap; work has not started.",
+      "An advanced industrial capability sector platform on the group's roadmap; work has not started.",
+    disclaimer:
+      "No claim of government access, influence, or preferential mandate is made or implied.",
     url: null,
   },
   {
-    slug: "edemmic",
-    code: "EDEMMIC",
-    name: "Education & Human Capital",
+    slug: "foemmic",
+    code: "FOEMMIC",
+    name: "Food",
     status: SECTOR_STATUS.PLANNED,
-    tagline: "Learning, training, and workforce-development ventures.",
+    tagline: "Food production and processing ventures.",
     description:
-      "Placeholder copy: an education sector platform on the group's roadmap; work has not started.",
+      "A food production sector platform on the group's roadmap; work has not started.",
     url: null,
   },
   {
-    slug: "mdemmic",
-    code: "MDEMMIC",
-    name: "Media & Entertainment",
+    slug: "agemmic",
+    code: "AGEMMIC",
+    name: "Agriculture",
     status: SECTOR_STATUS.PLANNED,
-    tagline: "Content, distribution, and entertainment platforms.",
+    tagline: "Agricultural production and processing ventures.",
     description:
-      "Placeholder copy: a media sector platform on the group's roadmap; work has not started.",
+      "An agriculture sector platform on the group's roadmap; work has not started.",
     url: null,
   },
   {
-    slug: "mnemmic",
-    code: "MNEMMIC",
-    name: "Mining & Minerals",
+    slug: "xemmic",
+    code: "XEMMIC",
+    name: "Exploration",
     status: SECTOR_STATUS.PLANNED,
-    tagline: "Resource extraction and minerals processing.",
+    tagline: "Resource exploration and discovery ventures.",
     description:
-      "Placeholder copy: a mining sector platform on the group's roadmap; work has not started.",
-    url: null,
-  },
-  {
-    slug: "txemmic",
-    code: "TXEMMIC",
-    name: "Textiles & Apparel",
-    status: SECTOR_STATUS.PLANNED,
-    tagline: "Textile manufacturing and apparel value chains.",
-    description:
-      "Placeholder copy: a textiles sector platform on the group's roadmap; work has not started.",
+      "An exploration sector platform on the group's roadmap; work has not started.",
     url: null,
   },
 ];

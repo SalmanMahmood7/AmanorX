@@ -1,44 +1,60 @@
-// "Today and Tomorrow" recreated as a three-column (list | hub | list)
-// layout from a supplied design spec -- content (heading, description, both
+// "Today and Tomorrow" redesigned around <TodayVsVisionToggle> -- the
+// site's own sanctioned pattern for mixing "today" (live) and "vision"
+// (2030s) content ("never interleave them without this toggle" -- see that
+// component). The previous version put both lists side by side, which
+// technically violated that rule; this version puts live sectors and
+// future sectors behind the Today / Toward the 2030s tabs instead of
+// showing all 16 rows at once. Content (heading, description, both
 // sub-headings, the intro line, and every sector name/code/status) is
-// unchanged from src/content/home.js and the live sector registry; only
+// unchanged from src/content/home.js and the live sector registry -- only
 // the presentation changed.
 //
-// Deliberate deviations from the supplied spec, and why:
-//   - No hls.js / streamed video: the spec's center circle plays another
-//     product's actual hosted video (a Mux stream) with generic marketing
-//     copy ("Stop absorbing the chaos...") that isn't AmanorX's -- pulling
-//     that in would both add a real dependency for someone else's content
-//     and misattribute it as ours. The circle here instead shows a real
-//     AmanorX number (total EMMIC sector count), on-brand and meaningful.
+// Deliberate deviations from an earlier supplied design spec, carried
+// forward from the prior version of this file, and why:
+//   - No hls.js / streamed video: a spec once given for this section played
+//     another product's actual hosted video (a Mux stream) with generic
+//     marketing copy ("Stop absorbing the chaos...") that isn't AmanorX's.
+//     The hub circle instead shows a real AmanorX number (total EMMIC
+//     sector count), on-brand and meaningful.
 //   - No foreign cross/check icons or "Control" badge/gradient headline --
-//     same reasoning as the video: those are another product's specific
-//     assets and copy, not AmanorX's. Status is still shown the one
+//     same reasoning as the video. Status is still shown the one
 //     sanctioned way on this site, <StatusPill>, per constants.js's rule.
-//   - The Current/Future visual distinction (solid vs. dashed/tinted
-//     cards) is kept, since the section's own unchanged copy explicitly
-//     says the two must stay "visually separate."
 //   - No third-party "Mazzard H" font-face (unlicensed hosting domain,
-//     same call as the previous two redesigns).
+//     same call made elsewhere in this project).
 
+import Link from "next/link";
+import Button from "@/components/shared/Button";
 import Container from "@/components/shared/Container";
-import SectionHeading from "@/components/shared/SectionHeading";
 import StatusPill from "@/components/shared/StatusPill";
 import Reveal from "@/components/shared/Reveal";
+import AnimatedHeading from "@/components/home/AnimatedHeading";
+import TodayVsVisionToggle from "@/components/shared/TodayVsVisionToggle";
+import { SECTOR_STATUS_LABEL } from "@/content/constants";
 
+// Live rows double as sector highlights: they carry the sector tagline and
+// link through to the Sectors directory. Future rows stay compact -- the
+// dashed treatment already marks them as not-yet-live.
 function SectorRow({ sector, dashed }) {
   return (
-    <div
-      className={`flex items-start justify-between gap-3 rounded-2xl p-4 shadow-[0_3px_9px_rgba(63,74,126,0.05),0_1px_20px_rgba(63,74,126,0.08)] ${
-        dashed ? "border border-dashed border-navy-900/15 bg-navy-50/60" : "bg-white"
+    <Link
+      href="/sectors#directory"
+      className={`group flex items-start justify-between gap-3 rounded-2xl p-4 shadow-[0_3px_9px_rgba(63,74,126,0.05),0_1px_20px_rgba(63,74,126,0.08)] transition-colors duration-200 ${
+        dashed
+          ? "border border-dashed border-navy-900/15 bg-navy-50/60 hover:border-green-500/50"
+          : "bg-white hover:bg-navy-50"
       }`}
     >
       <div>
-        <p className="text-sm font-medium text-navy-900">{sector.name}</p>
+        <p className="text-sm font-medium text-navy-900 transition-colors group-hover:text-green-600">
+          {sector.name}
+        </p>
         <p className="text-xs text-silver-ink">{sector.code}</p>
+        {!dashed && sector.tagline ? (
+          <p className="mt-1.5 text-xs leading-relaxed text-navy-700">{sector.tagline}</p>
+        ) : null}
       </div>
       <StatusPill status={sector.status} />
-    </div>
+    </Link>
   );
 }
 
@@ -49,47 +65,90 @@ export default function TodayTomorrowSection({
   tomorrowHeading,
   tomorrowIntro,
   liveSectors,
-  futureSectors,
-  totalSectors,
+  pipelineSectors,
+  plannedSectors,
+  ctaSectors,
+  ctaPortfolio,
 }) {
   return (
     <section className="bg-white py-16 sm:py-20">
       <Container size="xl">
-        <Reveal>
-          <SectionHeading>{heading}</SectionHeading>
-          <p className="mt-3 max-w-2xl text-navy-700">{description}</p>
+        {/* Bespoke centered heading for this section only -- skips the
+            shared <SectionHeading>'s green tick rule and left alignment,
+            per explicit instruction; every other homepage section keeps
+            that brand signature unchanged. */}
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <AnimatedHeading
+            startOnView
+            as="h2"
+            text={heading}
+            className="text-h2 font-semibold text-navy-900"
+          />
+          <p className="mt-3 text-navy-700">{description}</p>
         </Reveal>
 
-        <div className="mt-10 flex flex-col gap-6 lg:grid lg:grid-cols-[26vw_1fr_26vw] lg:items-start lg:gap-9">
-          <Reveal className="order-2 flex flex-col gap-3 lg:order-none">
-            <h3 className="text-lg font-semibold text-navy-900">{todayHeading}</h3>
-            <div className="mt-2 flex flex-col gap-3">
-              {liveSectors.map((sector) => (
-                <SectorRow key={sector.slug} sector={sector} />
-              ))}
-            </div>
-          </Reveal>
+        {/* text-center here only to center the toggle's inline-flex tab
+            pill row -- the card grids below reset back to text-left so
+            sector names/taglines don't inherit the centering. */}
+        <Reveal delay={120} className="mt-8 text-center">
+          <TodayVsVisionToggle
+            autoAdvance
+            todayLabel={todayHeading}
+            visionLabel={tomorrowHeading}
+            todayContent={
+              <div className="grid gap-3 text-left sm:grid-cols-2">
+                {liveSectors.map((sector) => (
+                  <SectorRow key={sector.slug} sector={sector} />
+                ))}
+              </div>
+            }
+            visionContent={
+              <div className="flex flex-col gap-4 text-left">
+                <p className="max-w-2xl text-sm text-navy-700">{tomorrowIntro}</p>
+                {/* Pipeline and Planned are different stages on the
+                    roadmap, not one undifferentiated "future" pile -- kept
+                    as two separate columns rather than one mixed grid. */}
+                <div className="grid gap-6 sm:grid-cols-2">
+                  <div className="flex flex-col gap-3">
+                    <h4 className="text-xs font-semibold tracking-wide text-silver-ink uppercase">
+                      {SECTOR_STATUS_LABEL.PIPELINE}
+                    </h4>
+                    <div className="flex flex-col gap-3">
+                      {pipelineSectors.map((sector) => (
+                        <SectorRow key={sector.slug} sector={sector} dashed />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <h4 className="text-xs font-semibold tracking-wide text-silver-ink uppercase">
+                      {SECTOR_STATUS_LABEL.PLANNED}
+                    </h4>
+                    <div className="flex flex-col gap-3">
+                      {plannedSectors.map((sector) => (
+                        <SectorRow key={sector.slug} sector={sector} dashed />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            }
+          />
+        </Reveal>
 
-          <Reveal
-            delay={80}
-            className="order-1 flex items-center justify-center lg:order-none lg:self-center"
-          >
-            <div className="flex h-40 w-40 shrink-0 flex-col items-center justify-center rounded-full bg-linear-to-br from-navy-900 via-navy-800 to-green-600 text-center text-white shadow-[0_10px_30px_rgba(13,26,46,0.25)] sm:h-48 sm:w-48">
-              <span className="font-mono text-4xl font-semibold sm:text-5xl">{totalSectors}</span>
-              <span className="mt-1 text-xs tracking-wide text-white/70 uppercase">EMMIC Sectors</span>
-            </div>
+        {ctaSectors || ctaPortfolio ? (
+          <Reveal className="mt-12 flex flex-wrap justify-center gap-4">
+            {ctaSectors ? (
+              <Button href={ctaSectors.href} variant="primary" arrow>
+                {ctaSectors.label}
+              </Button>
+            ) : null}
+            {ctaPortfolio ? (
+              <Button href={ctaPortfolio.href} variant="outlineOnLight">
+                {ctaPortfolio.label}
+              </Button>
+            ) : null}
           </Reveal>
-
-          <Reveal delay={120} className="order-3 flex flex-col gap-3 lg:order-none">
-            <h3 className="text-lg font-semibold text-navy-900">{tomorrowHeading}</h3>
-            <p className="text-sm text-navy-700">{tomorrowIntro}</p>
-            <div className="mt-2 flex flex-col gap-3">
-              {futureSectors.map((sector) => (
-                <SectorRow key={sector.slug} sector={sector} dashed />
-              ))}
-            </div>
-          </Reveal>
-        </div>
+        ) : null}
       </Container>
     </section>
   );

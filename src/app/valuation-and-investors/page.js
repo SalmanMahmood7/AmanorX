@@ -1,8 +1,8 @@
-import EntityCard from "@/components/shared/EntityCard";
 import ValuationDisclaimer from "@/components/shared/ValuationDisclaimer";
 import PageShell from "@/components/shared/PageShell";
 import SectionHeading from "@/components/shared/SectionHeading";
 import Reveal from "@/components/shared/Reveal";
+import AnimatedHeading from "@/components/home/AnimatedHeading";
 import Button from "@/components/shared/Button";
 import { valuationInvestorsContent } from "@/content/valuationInvestors";
 import { pick } from "@/lib/i18n";
@@ -27,18 +27,49 @@ export default function ValuationAndInvestorsPage() {
       reference="AMX / 06"
       sections={SECTIONS}
     >
+      {/* Layered visual weight per the developer brief (§6): Layer 1 solid,
+          Layer 2 dashed, Layer 3 narrative only -- the visual treatment
+          itself communicates how firmly each layer's figure is anchored. */}
       <section id="structure" className="scroll-mt-28">
         <SectionHeading>How valuation is structured</SectionHeading>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-          {content.layers.map((layer, i) => (
-            <Reveal key={layer.id} delay={i * 80}>
-              <EntityCard
-                eyebrow={layer.label}
-                title={layer.name}
-                description={layer.body}
-              />
-            </Reveal>
-          ))}
+          <Reveal>
+            <div className="h-full rounded-lg border-t-2 border-green-500 bg-navy-900 p-6 text-white shadow-[0_10px_30px_rgba(13,26,46,0.2)] sm:p-7">
+              <span className="font-mono text-xs font-medium tracking-wide text-green-400 uppercase">
+                {content.layers[0].label} &middot; Solid
+              </span>
+              <h3 className="mt-4 text-lg font-semibold">{content.layers[0].name}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/75">
+                {content.layers[0].body}
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={80}>
+            <div className="h-full rounded-lg border-2 border-dashed border-navy-900/25 bg-white p-6 sm:p-7">
+              <span className="font-mono text-xs font-medium tracking-wide text-green-600 uppercase">
+                {content.layers[1].label} &middot; Range
+              </span>
+              <h3 className="mt-4 text-lg font-semibold text-navy-900">
+                {content.layers[1].name}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-navy-700">
+                {content.layers[1].body}
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={160}>
+            <div className="h-full p-6 sm:p-7">
+              <span className="font-mono text-xs font-medium tracking-wide text-silver-ink uppercase">
+                {content.layers[2].label} &middot; Narrative only
+              </span>
+              <h3 className="mt-4 text-lg font-semibold text-navy-900">
+                {content.layers[2].name}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-navy-700">
+                {content.layers[2].body}
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -88,13 +119,18 @@ export default function ValuationAndInvestorsPage() {
       </section>
 
       <section id="gate" className="scroll-mt-28">
-        <div className="border-l-4 border-green-500 bg-navy-900 p-8 text-white sm:p-10">
-          <h2 className="text-h2 font-semibold">{content.gate.heading}</h2>
+        <Reveal className="border-l-4 border-green-500 bg-navy-900 p-8 text-white sm:p-10">
+          <AnimatedHeading
+            startOnView
+            as="h2"
+            text={content.gate.heading}
+            className="text-h2 font-semibold"
+          />
           <p className="mt-3 max-w-2xl text-lg text-white/80">{content.gate.body}</p>
           <Button href={content.gate.cta.href} variant="primary" arrow className="mt-6">
             {content.gate.cta.label}
           </Button>
-        </div>
+        </Reveal>
 
         <p className="mt-8 max-w-2xl text-xs leading-relaxed text-silver-ink">
           {content.disclaimer}

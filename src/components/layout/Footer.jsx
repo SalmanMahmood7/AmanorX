@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Wordmark from "./Wordmark";
 import Container from "@/components/shared/Container";
+import Reveal from "@/components/shared/Reveal";
 import { footerContent } from "@/content/site";
 import { pick } from "@/lib/i18n";
 
@@ -8,19 +9,19 @@ const footer = pick(footerContent);
 
 export default function Footer() {
   return (
-    <footer className="rounded-t-3xl border-t border-white/10 bg-navy-900 text-white/80">
+    <footer className="border-t border-white/10 bg-navy-900 text-white/80">
       <Container size="xl" className="py-10">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
           {/* Left: logo only -- kept empty otherwise. */}
-          <div>
+          <Reveal>
             <Link href="/" aria-label="AmanorX home">
               <Wordmark className="text-3xl text-white" />
             </Link>
-          </div>
+          </Reveal>
 
           {/* Right: Quick Links / Social / Get in Touch, side by side. */}
           <div className="grid gap-10 sm:grid-cols-3 sm:gap-16">
-            <nav aria-label="Footer">
+            <Reveal as="nav" delay={80} aria-label="Footer">
               <h2 className="text-sm font-semibold text-white">{footer.quickLinksHeading}</h2>
               <ul className="mt-4 space-y-3 text-sm">
                 {footer.links.map((link) => (
@@ -31,9 +32,9 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </nav>
+            </Reveal>
 
-            <nav aria-label="Social">
+            <Reveal as="nav" delay={160} aria-label="Social">
               <h2 className="text-sm font-semibold text-white">{footer.socialHeading}</h2>
               <ul className="mt-4 space-y-3 text-sm">
                 {footer.socialLinks.map((social) => (
@@ -59,9 +60,9 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </nav>
+            </Reveal>
 
-            <nav aria-label="Get in touch">
+            <Reveal as="nav" delay={240} aria-label="Get in touch">
               <h2 className="text-sm font-semibold text-white">{footer.contactInfo.heading}</h2>
               <ul className="mt-4 space-y-3 text-sm">
                 <li>{footer.contactInfo.address}</li>
@@ -73,9 +74,16 @@ export default function Footer() {
                     {footer.contactInfo.email}
                   </a>
                 </li>
-                <li>{footer.contactInfo.phone}</li>
+                <li>
+                  <a
+                    href={`tel:${footer.contactInfo.phone.replace(/\s/g, "")}`}
+                    className="transition-colors hover:text-green-400"
+                  >
+                    {footer.contactInfo.phone}
+                  </a>
+                </li>
               </ul>
-            </nav>
+            </Reveal>
           </div>
         </div>
 

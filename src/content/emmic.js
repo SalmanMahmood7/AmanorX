@@ -9,7 +9,7 @@ export const emmicSteps = {
       name: "Evaluation",
       summary: "Assessing opportunity before capital moves.",
       description:
-        "Placeholder copy: every venture and asset is screened against sector criteria, market evidence, and the group's risk framework before it proceeds.",
+        "Every venture and asset is screened against sector criteria, market evidence, and the group's risk framework before it proceeds.",
     },
     {
       id: "management",
@@ -17,7 +17,7 @@ export const emmicSteps = {
       name: "Management",
       summary: "Operating discipline once a venture is underway.",
       description:
-        "Placeholder copy: governance, reporting, and operating support applied to ventures once they move past evaluation.",
+        "Governance, reporting, and operating support applied to ventures once they move past evaluation.",
     },
     {
       id: "marketplace",
@@ -25,7 +25,7 @@ export const emmicSteps = {
       name: "Marketplace",
       summary: "Connecting supply, demand, and participants within the sector.",
       description:
-        "Placeholder copy: the sector's marketplace layer, where buyers, sellers, and partners transact within the platform.",
+        "The sector's marketplace layer, where buyers, sellers, and partners transact within the platform.",
     },
     {
       id: "investment",
@@ -33,7 +33,7 @@ export const emmicSteps = {
       name: "Investment",
       summary: "Deploying and structuring capital into the sector.",
       description:
-        "Placeholder copy: capital deployment into evaluated opportunities, structured for the sector's specific risk and return profile.",
+        "Capital deployment into evaluated opportunities, structured for the sector's specific risk and return profile.",
     },
     {
       id: "company",
@@ -41,7 +41,7 @@ export const emmicSteps = {
       name: "Company",
       summary: "The operating entity that results from the cycle.",
       description:
-        "Placeholder copy: the standalone operating company or asset that emerges from the Evaluation-Management-Marketplace-Investment cycle.",
+        "The standalone operating company or asset that emerges from the Evaluation, Management, Marketplace, Investment cycle.",
     },
   ],
 };

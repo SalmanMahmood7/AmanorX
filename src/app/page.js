@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/home/FadeIn";
 import AnimatedHeading from "@/components/home/AnimatedHeading";
@@ -7,26 +6,14 @@ import ArchitectureSection from "@/components/home/ArchitectureSection";
 import EmmicSection from "@/components/home/EmmicSection";
 import WhyAmanorXBenefits from "@/components/home/WhyAmanorXBenefits";
 import TodayTomorrowSection from "@/components/home/TodayTomorrowSection";
-import Section from "@/components/shared/Section";
-import SectionHeading from "@/components/shared/SectionHeading";
+import NewsCarousel from "@/components/home/NewsCarousel";
 import Button from "@/components/shared/Button";
-import TextLink from "@/components/shared/TextLink";
+import Container from "@/components/shared/Container";
 import Reveal from "@/components/shared/Reveal";
-import {
-  GridIcon,
-  BuildingIcon,
-  LayersIcon,
-  CompassIcon,
-  ShieldIcon,
-  PulseIcon,
-  SparkIcon,
-  GlobeIcon,
-  UsersIcon,
-  TargetIcon,
-} from "@/components/shared/icons";
 import { tiers } from "@/content/tiers";
 import { homeContent } from "@/content/home";
 import { emmicSteps } from "@/content/emmic";
+import { contactContent } from "@/content/contact";
 import { pick } from "@/lib/i18n";
 import { getLiveSectors, getSectorsByStatus, countSectorsByStatus } from "@/lib/data/sectors";
 import { getAllPortfolioCompanies } from "@/lib/data/portfolioCompanies";
@@ -35,6 +22,7 @@ import { SECTOR_STATUS } from "@/content/constants";
 const content = pick(homeContent);
 const tierList = pick(tiers);
 const steps = pick(emmicSteps);
+const contact = pick(contactContent);
 
 const statusCounts = countSectorsByStatus();
 const totalSectors = statusCounts.LIVE + statusCounts.PIPELINE + statusCounts.PLANNED;
@@ -42,30 +30,6 @@ const liveSectors = getLiveSectors();
 const pipelineSectors = getSectorsByStatus(SECTOR_STATUS.PIPELINE);
 const plannedSectors = getSectorsByStatus(SECTOR_STATUS.PLANNED);
 const portfolioCompanies = getAllPortfolioCompanies();
-
-const ICONS = {
-  grid: GridIcon,
-  building: BuildingIcon,
-  layers: LayersIcon,
-  compass: CompassIcon,
-  shield: ShieldIcon,
-  pulse: PulseIcon,
-  spark: SparkIcon,
-  globe: GlobeIcon,
-  users: UsersIcon,
-  target: TargetIcon,
-};
-
-function SnapshotCard({ icon, title, description }) {
-  const Icon = ICONS[icon] ?? GridIcon;
-  return (
-    <div className="border border-t-2 border-navy-900/10 border-t-green-500 bg-white p-6 sm:p-7">
-      <Icon className="text-green-600" width={28} height={28} />
-      <h3 className="mt-4 text-base font-semibold text-navy-900">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-navy-700">{description}</p>
-    </div>
-  );
-}
 
 export default function HomePage() {
   const [coreTier, ...otherTiers] = tierList;
@@ -75,24 +39,27 @@ export default function HomePage() {
       {/* Homepage keeps its own bespoke marketing layout, distinct from the
           sidebar-shell layout every other page uses via <PageShell>. */}
 
-      {/* Hero: full-bleed real photo (low-angle corporate glass towers in
-          the site's dark navy tones, evoking the institutional holding
-          identity; Unsplash, replaces the earlier highway aerial which is
-          kept at /images/hero-bg.jpg), content pinned to the bottom of the
-          viewport, character-staggered heading entrance.
+      {/* Hero: full-bleed short skyline timelapse (night skyscrapers in the
+          site's dark navy tones; Pexels video 8064305, re-encoded to ~2MB,
+          audio stripped). Poster is the video's own first frame so the
+          pre-play paint matches seamlessly; earlier stills are kept at
+          /images/hero-bg.jpg and hero-bg-2.jpg. Content pinned to the
+          bottom of the viewport, character-staggered heading entrance.
           Glass ("liquid-glass") chrome throughout, matching <Header>'s
           treatment. */}
       {/* `isolate` scopes the -z-20 image / -z-10 gradient to this section's
           own stacking context -- without it they paint underneath the
           section's opaque navy background and the photo never shows. */}
       <section className="relative isolate flex h-screen w-full flex-col overflow-hidden bg-navy-950 text-white">
-        <Image
-          src="/images/hero-bg-2.jpg"
-          alt="Low angle view of dark glass office towers rising against the sky"
-          fill
-          priority
-          sizes="100vw"
-          className="absolute inset-0 -z-20 object-cover"
+        <video
+          src="/videos/hero-skyline.mp4"
+          poster="/images/hero-poster.jpg"
+          autoPlay
+          loop
+          muted
+          playsInline
+          aria-hidden="true"
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
         <div
           aria-hidden="true"
@@ -203,50 +170,61 @@ export default function HomePage() {
         tomorrowHeading={content.todayTomorrow.tomorrowHeading}
         tomorrowIntro={content.todayTomorrow.tomorrowIntro}
         liveSectors={liveSectors}
-        futureSectors={[...pipelineSectors, ...plannedSectors]}
-        totalSectors={totalSectors}
+        pipelineSectors={pipelineSectors}
+        plannedSectors={plannedSectors}
+        ctaSectors={content.todayTomorrow.ctaSectors}
+        ctaPortfolio={content.todayTomorrow.ctaPortfolio}
       />
 
       {/* 8. Why AmanorX -- same 6 cards, staircase-pillar presentation. */}
       <WhyAmanorXBenefits heading={content.whyAmanorX.heading} cards={content.whyAmanorX.cards} />
 
-      {/* 11. News & Insights -- respects Insights' documented empty-at-launch
-          state (see src/content/insights.js); no invented headlines. */}
-      <Section background="white">
-        <SectionHeading>{content.newsInsights.heading}</SectionHeading>
-        <p className="mt-3 max-w-2xl text-navy-700">{content.newsInsights.description}</p>
-        <div className="mt-10 grid gap-6 sm:grid-cols-3">
-          {["Press mentions", "Milestone updates", "Sector launches"].map((label, i) => (
-            <Reveal key={label} delay={i * 80}>
-              <div className="h-full border border-dashed border-navy-900/15 bg-navy-50/60 p-6">
-                <h3 className="text-sm font-semibold text-navy-900">{label}</h3>
-                <p className="mt-3 text-sm text-silver-ink">
-                  Nothing published yet. Check back as sector platforms launch publicly.
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-        <TextLink href={content.newsInsights.cta.href} className="mt-10">
-          {content.newsInsights.cta.label}
-        </TextLink>
-      </Section>
+      {/* 11. News & Insights -- carousel-card layout recreated from a
+          supplied stories-carousel spec, adapted to the site's honest
+          empty-at-launch state (see NewsCarousel). */}
+      <NewsCarousel
+        heading={content.newsInsights.heading}
+        description={content.newsInsights.description}
+        cta={content.newsInsights.cta}
+      />
 
-      {/* 12. Careers */}
-      <Section background="tint">
-        <SectionHeading>{content.careersSection.heading}</SectionHeading>
-        <p className="mt-3 max-w-2xl text-navy-700">{content.careersSection.description}</p>
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-          {content.careersSection.highlights.map((item, i) => (
-            <Reveal key={item.title} delay={i * 80}>
-              <SnapshotCard {...item} />
-            </Reveal>
-          ))}
-        </div>
-        <Button href={content.careersSection.cta.href} variant="primary" arrow className="mt-8">
-          {content.careersSection.cta.label}
-        </Button>
-      </Section>
+      {/* 12. Contact, the homepage's closing CTA band -- reuses the
+          Contact page's own real heading/intro and its three real inquiry
+          paths (src/content/contact.js) in place of the group counts that
+          used to sit here, rather than inventing new contact copy. */}
+      <section className="border-t-2 border-green-500 bg-navy-900 py-20 text-white sm:py-28">
+        <Container size="lg">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <AnimatedHeading
+              startOnView
+              as="h2"
+              text={contact.heading}
+              className="text-h2 font-semibold sm:text-4xl lg:text-5xl"
+            />
+            <p className="mt-4 text-lg text-white/70">{contact.intro}</p>
+
+            <div className="mt-8 flex justify-center">
+              <Button href="/contact" variant="primary">
+                Contact Us
+              </Button>
+            </div>
+
+            <ul className="mt-12 flex flex-wrap justify-center gap-3 border-t border-white/10 pt-8">
+              {contact.paths.map((path, i) => (
+                <Reveal
+                  as="li"
+                  effect="scale"
+                  key={path.id}
+                  delay={i * 80}
+                  className="rounded-full border border-white/15 px-4 py-1.5 text-xs font-medium tracking-wide text-white/70 uppercase"
+                >
+                  {path.heading}
+                </Reveal>
+              ))}
+            </ul>
+          </Reveal>
+        </Container>
+      </section>
 
     </>
   );

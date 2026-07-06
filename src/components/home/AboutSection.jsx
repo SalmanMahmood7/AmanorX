@@ -1,7 +1,11 @@
 // About section: same AmanorX copy as before, restyled to a supplied visual
 // spec (chamfered clip-path stat cards, #F0F5F7/#154359 palette, font-firs
-// display face). No hooks/interactivity needed -- pure CSS (group-hover),
-// so this stays a plain server component.
+// display face). No hooks/interactivity needed -- pure CSS (group-hover)
+// plus the shared <Reveal> scroll-reveal wrappers, so this stays a plain
+// server component.
+
+import Reveal from "@/components/shared/Reveal";
+import AnimatedHeading from "@/components/home/AnimatedHeading";
 
 const CARD_CLIP_PATH = [
   "polygon(64px 0, calc(100% - 14px) 0, calc(100% - 4px) 4px, 100% 14px, 100% calc(100% - 14px), calc(100% - 4px) calc(100% - 4px), calc(100% - 14px) 100%, 14px 100%, 4px calc(100% - 4px), 0 calc(100% - 14px), 0 64px)",
@@ -19,19 +23,32 @@ function StatCard({ index, value, text, image, alt, offset }) {
   const clipPath = CARD_CLIP_PATH[index % CARD_CLIP_PATH.length];
 
   return (
-    <div className={`relative h-[280px] w-full sm:h-[340px] ${offset ? "lg:mt-24" : ""}`}>
+    <Reveal
+      delay={index * 120}
+      className={`relative h-[280px] w-full sm:h-[340px] ${offset ? "lg:mt-24" : ""}`}
+    >
       <div
         className="h-full w-full"
         style={{ backgroundColor: "rgba(255, 255, 255, 0.8)", padding: "1.5px", clipPath }}
       >
-        <div
-          className="relative h-full w-full overflow-hidden bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${image})`,
-            mixBlendMode: "normal",
-            clipPath,
-          }}
-        >
+        <div className="relative h-full w-full overflow-hidden" style={{ clipPath }}>
+          {/* Image on its own layer so the blur doesn't soften the text
+              above it; scaled slightly so the blur doesn't expose
+              transparent edges. */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url(${image})`,
+              filter: "blur(3px)",
+              transform: "scale(1.06)",
+            }}
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0"
+            style={{ backgroundColor: "rgba(240, 245, 247, 0.3)" }}
+          />
           <div className={CARD_TEXT_POSITION[index % CARD_TEXT_POSITION.length]}>
             <p
               className="font-firs text-[36px] leading-none font-semibold uppercase sm:text-[52px]"
@@ -50,7 +67,7 @@ function StatCard({ index, value, text, image, alt, offset }) {
           </div>
         </div>
       </div>
-    </div>
+    </Reveal>
   );
 }
 
@@ -63,19 +80,20 @@ export default function AboutSection({ eyebrow, heading, paragraphs, cta, stats 
     >
       <div className="mx-auto w-full max-w-7xl">
         <div className="flex flex-col items-start justify-between gap-10 lg:flex-row lg:gap-20">
-          <div style={{ color: "#154359" }}>
+          <Reveal style={{ color: "#154359" }}>
             <p className="text-xs font-medium tracking-[0.15em] uppercase" style={{ color: "#154359" }}>
               {eyebrow}
             </p>
-            <h2
+            <AnimatedHeading
+              startOnView
+              as="h2"
+              text={heading}
               className="font-firs mt-4 text-[36px] leading-[0.95] font-semibold tracking-tight uppercase sm:text-[48px] lg:text-[54px]"
               style={{ color: "#154359" }}
-            >
-              {heading}
-            </h2>
-          </div>
+            />
+          </Reveal>
 
-          <div className="flex max-w-xl flex-col">
+          <Reveal delay={120} className="flex max-w-xl flex-col">
             <div className="text-[17px] leading-[1.5] sm:text-[18px]" style={{ color: "#154359" }}>
               {paragraphs.map((para) => (
                 <div key={para.text} className={para.label ? "mt-3" : "mt-4 first:mt-0"}>
@@ -114,7 +132,7 @@ export default function AboutSection({ eyebrow, heading, paragraphs, cta, stats 
                 </svg>
               </span>
             </a>
-          </div>
+          </Reveal>
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">

@@ -158,15 +158,27 @@ body {
    to "visible". Scripting-disabled browsers and reduced-motion users get the
    content immediately (see guards below) so this never hides content from a
    no-JS visitor or a crawler that doesn't run the observer callback. */
+/* Tuned to be clearly visible (28px travel, slower settle) -- an earlier
+   pass shrank this to a 10px/0.35s drift, but that read as "no animation"
+   and was reverted per explicit instruction to make the scroll reveals
+   obvious site-wide. */
 [data-reveal] {
+  --reveal-hidden-transform: translateY(28px);
   transition:
-    opacity 0.5s var(--ease-out-expo),
-    transform 0.5s var(--ease-out-expo);
+    opacity 0.7s var(--ease-out-expo),
+    transform 0.7s var(--ease-out-expo);
+}
+
+/* Icon/badge variant (<Reveal effect="scale">): pops in with a scale
+   instead of the default rise. Styled through the custom property so the
+   reduced-motion / no-JS guards below override both variants equally. */
+[data-reveal][data-reveal-effect="scale"] {
+  --reveal-hidden-transform: scale(0.5);
 }
 
 [data-reveal="pending"] {
   opacity: 0;
-  transform: translateY(28px);
+  transform: var(--reveal-hidden-transform);
 }
 
 [data-reveal="visible"] {
@@ -181,29 +193,19 @@ body {
   }
 }
 
-/* Scroll-tied path: on browsers with CSS scroll-driven animations, <Reveal>
-   sets data-reveal="scroll" and steps out of the way entirely -- opacity and
-   transform are driven by the element's own scroll position via
-   animation-timeline, not by a one-shot JS-toggled class. This is what
-   produces the Apple-product-page feel (motion tracks scroll, not just
-   "entered viewport once"). */
-@supports (animation-timeline: view()) {
-  @keyframes reveal-on-scroll {
-    from {
-      opacity: 0;
-      transform: translateY(28px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+/* (The old `animation-timeline: view()` scroll-tied path was removed --
+   it produced no visible motion in practice, so <Reveal> now always uses
+   the IntersectionObserver "pending"/"visible" transition above.) */
 
-  [data-reveal="scroll"] {
-    animation: reveal-on-scroll linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 40%;
-  }
+/* Scrollbar-less horizontal rail, used by the homepage's card carousels
+   (e.g. <NewsCarousel>) -- native scroll/swipe stays, the OS scrollbar
+   chrome doesn't compete with the arrow-button affordance next to it. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Respect reduced-motion preference sitewide; components add transitions opt-in. */
@@ -218,12 +220,6 @@ body {
   }
 
   [data-reveal="pending"] {
-    opacity: 1;
-    transform: none;
-  }
-
-  [data-reveal="scroll"] {
-    animation: none;
     opacity: 1;
     transform: none;
   }

@@ -4,8 +4,10 @@
 // company data through these functions, never by importing
 // src/content/portfolioCompanies.js directly.
 
-import { portfolioCompanies } from "@/content/portfolioCompanies";
+import { portfolioCompanies, AKHEE_SUB_HOLDING } from "@/content/portfolioCompanies";
 import { SECTOR_STATUS, isValidSectorStatus } from "@/content/constants";
+
+export { AKHEE_SUB_HOLDING };
 
 export function getAllPortfolioCompanies() {
   return portfolioCompanies;
@@ -24,4 +26,12 @@ export function getPortfolioCompaniesByStatus(status) {
 
 export function getLivePortfolioCompanies() {
   return getPortfolioCompaniesByStatus(SECTOR_STATUS.LIVE);
+}
+
+export function getDirectlyHeldPortfolioCompanies() {
+  return portfolioCompanies.filter((company) => !company.subHolding);
+}
+
+export function getPortfolioCompaniesBySubHolding(subHolding) {
+  return portfolioCompanies.filter((company) => company.subHolding === subHolding);
 }

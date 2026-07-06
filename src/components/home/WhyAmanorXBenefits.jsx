@@ -18,6 +18,9 @@
 //     the homepage hero video) since it's a generic decorative loop, not
 //     branded copy or a specific product claim.
 
+import Reveal from "@/components/shared/Reveal";
+import AnimatedHeading from "@/components/home/AnimatedHeading";
+
 const VIDEO_SRC =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260421_072701_f6a01abb-eb30-4559-9d6e-774362defbc3.mp4";
 
@@ -35,17 +38,18 @@ export default function WhyAmanorXBenefits({ heading, cards }) {
   const [left, center, right] = cards;
 
   return (
-    <section className="relative w-full bg-black px-4 py-12 sm:px-6 sm:py-20 md:px-10">
-      <h2
+    <section className="relative w-full bg-navy-900 px-4 py-12 sm:px-6 sm:py-20 md:px-10">
+      <AnimatedHeading
+        startOnView
+        as="h2"
+        text={heading}
         className="mb-12 text-center text-3xl font-light text-white sm:mb-24 sm:text-4xl md:text-5xl"
         style={{ letterSpacing: "-0.04em" }}
-      >
-        {heading}
-      </h2>
+      />
 
       <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3">
         {/* Left text card -- description sits mid-card. */}
-        <div className="relative h-[380px] overflow-hidden rounded-2xl bg-neutral-950 p-6 sm:h-[460px] sm:p-8">
+        <Reveal className="relative h-[380px] overflow-hidden rounded-2xl bg-neutral-950 p-6 sm:h-[460px] sm:p-8">
           <div
             aria-hidden="true"
             className="absolute top-1/2 -left-[420px] h-[460px] w-[460px] -translate-y-1/2 rounded-full bg-green-500 opacity-40 blur-3xl"
@@ -56,10 +60,13 @@ export default function WhyAmanorXBenefits({ heading, cards }) {
               {left.description}
             </p>
           </div>
-        </div>
+        </Reveal>
 
         {/* Center video card -- heading only, no paragraph. */}
-        <div className="relative flex h-[380px] flex-col overflow-hidden rounded-2xl bg-neutral-950 sm:h-[460px]">
+        <Reveal
+          delay={120}
+          className="relative flex h-[380px] flex-col overflow-hidden rounded-2xl bg-neutral-950 sm:h-[460px]"
+        >
           <div className="relative w-full overflow-hidden" style={{ height: "75%" }}>
             <video
               className="block h-full w-full object-cover"
@@ -77,10 +84,13 @@ export default function WhyAmanorXBenefits({ heading, cards }) {
           <div className="flex flex-1 items-center justify-center p-6 sm:p-8">
             <CardHeading line1={center.line1} line2={center.line2} />
           </div>
-        </div>
+        </Reveal>
 
         {/* Right text card -- description pinned to the bottom. */}
-        <div className="relative h-[380px] overflow-hidden rounded-2xl bg-neutral-950 p-6 sm:h-[460px] sm:p-8">
+        <Reveal
+          delay={240}
+          className="relative h-[380px] overflow-hidden rounded-2xl bg-neutral-950 p-6 sm:h-[460px] sm:p-8"
+        >
           <div
             aria-hidden="true"
             className="absolute -top-28 -right-28 h-56 w-56 rounded-full bg-green-500 opacity-40 blur-3xl"
@@ -91,7 +101,7 @@ export default function WhyAmanorXBenefits({ heading, cards }) {
               {right.description}
             </p>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

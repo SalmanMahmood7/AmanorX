@@ -25,12 +25,13 @@ export const primaryNav = {
       children: [
         { label: "Who We Are", href: "/who-we-are" },
         { label: "Our Portfolio", href: "/portfolio" },
+        { label: "Governance", href: "/governance" },
       ],
     },
     { label: "The Architecture", href: "/architecture" },
     { label: "Sectors", href: "/sectors" },
-    { label: "Governance", href: "/governance" },
     { label: "Valuation & Investors", href: "/valuation-and-investors" },
+    { label: "Insights", href: "/insights" },
     { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
   ],
@@ -65,17 +66,12 @@ export const footerContent = {
       { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/contact" },
     ],
-    // TODO(AmanorX): office address and phone are intentionally left as
-    // "Pending confirmation" -- same reasoning as the governance principal
-    // names (src/content/governance.js): this build will not invent a real
-    // company's street address or phone number. Email uses the `.example`
-    // reserved TLD placeholder convention already used across
-    // src/content/sectors.js and src/content/careers.js.
+    // Address, email, and phone supplied by the owner.
     contactInfo: {
       heading: "Contact Information",
-      address: "Islamabad, Pakistan (registered office address pending confirmation)",
-      email: "info@amanorx.example",
-      phone: "Pending confirmation",
+      address: "17 Hills Apartment, Traders Colony, Bara Kahu, Islamabad, Pakistan",
+      email: "info@amanorx.com",
+      phone: "+92 333 2219648",
     },
     socialHeading: "Follow Us",
     socialLinks: [
