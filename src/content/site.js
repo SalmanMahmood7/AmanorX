@@ -69,7 +69,7 @@ export const footerContent = {
     // Address, email, and phone supplied by the owner.
     contactInfo: {
       heading: "Contact Information",
-      address: "17 Hills Apartment, Traders Colony, Bara Kahu, Islamabad, Pakistan",
+      address: "Prepreneurship Apartment, Chaman Zar Hill, 17 Mile, Islamabad, Pakistan",
       email: "info@amanorx.com",
       phone: "+92 333 2219648",
     },

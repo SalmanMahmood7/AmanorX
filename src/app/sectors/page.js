@@ -1,61 +1,41 @@
-import SectorsFilterGrid from "@/components/sectors/SectorsFilterGrid";
+import SectorIndex from "@/components/sectors/SectorIndex";
 import TodayVsVisionToggle from "@/components/shared/TodayVsVisionToggle";
 import Container from "@/components/shared/Container";
+import Button from "@/components/shared/Button";
 import Reveal from "@/components/shared/Reveal";
 import AnimatedHeading from "@/components/home/AnimatedHeading";
 import FadeIn from "@/components/home/FadeIn";
-import { countSectorsByStatus } from "@/lib/data/sectors";
-import { SECTOR_STATUS_LIST, SECTOR_STATUS_LABEL } from "@/content/constants";
+import { getAllSectors, countSectorsByStatus } from "@/lib/data/sectors";
+import { SECTOR_STATUS_LABEL } from "@/content/constants";
 
 const statusCounts = countSectorsByStatus();
-const totalSectors = SECTOR_STATUS_LIST.reduce((sum, status) => sum + statusCounts[status], 0);
+const totalSectors = getAllSectors().length;
 
 export const metadata = {
   title: "Sectors",
 };
 
 // Bespoke full-width layout -- deliberately not <PageShell>, same call as
-// the other redesigned pages. The today/vision framing keeps the
-// sanctioned <TodayVsVisionToggle> separator; the hero stats are plain
-// counts, not narrative, so they don't mix the two axes.
+// the other redesigned pages. The directory is a grouped, ledger-style
+// index (<SectorIndex>) rather than a filterable card grid; the grouping by
+// status replaces the old filter pills, and #directory stays as the anchor
+// other pages deep-link to. The today/vision framing keeps the sanctioned
+// <TodayVsVisionToggle> separator.
 export default function SectorsPage() {
   return (
     <>
-      <section className="border-b-2 border-green-500 bg-navy-900 text-white">
-        <Container size="xl" className="py-16 sm:py-20">
+      <section className="border-b-2 border-green-500 bg-navy-950 text-white">
+        <Container size="xl" className="py-20 sm:py-24">
           <AnimatedHeading
-            text="Sectors"
+            text={"One model.\nSixteen sectors."}
             className="max-w-3xl text-display font-semibold text-white"
           />
-          <FadeIn delay={500} duration={1000}>
+          <FadeIn delay={700} duration={1000}>
             <p className="mt-6 max-w-2xl text-lg text-white/75">
-              AmanorX operates across the EMMIC architecture&apos;s {totalSectors} sectors,
-              each at a different stage of build out.
+              Every AmanorX sector runs the same EMMIC cycle -- Evaluation,
+              Management, Marketplace, Investment, Company -- on its own
+              dedicated platform. Each one links out to its own site below.
             </p>
-          </FadeIn>
-
-          <FadeIn
-            delay={900}
-            duration={1000}
-            as="dl"
-            className="mt-10 flex flex-wrap gap-x-12 gap-y-5 border-t border-white/10 pt-8"
-          >
-            <div>
-              <dt className="font-mono text-3xl font-semibold text-green-400">{totalSectors}</dt>
-              <dd className="mt-1 text-xs tracking-wide text-white/60 uppercase">
-                EMMIC Sectors
-              </dd>
-            </div>
-            {SECTOR_STATUS_LIST.map((status) => (
-              <div key={status}>
-                <dt className="font-mono text-3xl font-semibold text-green-400">
-                  {statusCounts[status]}
-                </dt>
-                <dd className="mt-1 text-xs tracking-wide text-white/60 uppercase">
-                  {SECTOR_STATUS_LABEL[status]}
-                </dd>
-              </div>
-            ))}
           </FadeIn>
         </Container>
       </section>
@@ -94,17 +74,43 @@ export default function SectorsPage() {
             <AnimatedHeading
               startOnView
               as="h2"
-              text="Sector Directory"
+              text="Sector Index"
               className="text-h2 font-semibold text-navy-900"
             />
             <p className="mt-3 max-w-2xl text-navy-700">
-              Filter by status. Live sectors link out to their own platform sites as they
-              launch publicly.
+              All {totalSectors} sectors of the EMMIC architecture, grouped by
+              stage of build out. Every sector links out to its own platform
+              site.
             </p>
           </Reveal>
-          <div className="mt-10">
-            <SectorsFilterGrid />
+          <div className="mt-12">
+            <SectorIndex />
           </div>
+        </Container>
+      </section>
+
+      <section className="bg-navy-900 py-16 text-white sm:py-20">
+        <Container size="xl" className="text-center">
+          <Reveal>
+            <AnimatedHeading
+              startOnView
+              as="h2"
+              text="See how the sixteen fit together"
+              className="mx-auto max-w-2xl text-h2 font-semibold text-white"
+            />
+            <p className="mx-auto mt-4 max-w-2xl text-white/75">
+              The group architecture connects every sector platform to the same
+              holding structure, governance, and capital model.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Button href="/architecture" arrow>
+                Explore the architecture
+              </Button>
+              <Button href="/contact" variant="outlineOnDark">
+                Talk to the group
+              </Button>
+            </div>
+          </Reveal>
         </Container>
       </section>
     </>

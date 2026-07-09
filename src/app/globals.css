@@ -208,6 +208,20 @@ body {
   display: none;
 }
 
+/* Infinite logo-style marquee, used by the hero's sector strip
+   (<HeroSectorMarquee>). The strip's content is rendered twice inside a
+   w-max flex row, so translating -50% lands exactly on the start of the
+   second copy and the loop wraps seamlessly. The reduced-motion guard
+   below freezes it into a static strip. */
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-sectors {
+  animation: marquee-scroll 55s linear infinite;
+}
+
 /* Respect reduced-motion preference sitewide; components add transitions opt-in. */
 @media (prefers-reduced-motion: reduce) {
   *,

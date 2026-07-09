@@ -4,6 +4,7 @@ import AnimatedHeading from "@/components/home/AnimatedHeading";
 import AboutSection from "@/components/home/AboutSection";
 import ArchitectureSection from "@/components/home/ArchitectureSection";
 import EmmicSection from "@/components/home/EmmicSection";
+import HeroSectorMarquee from "@/components/home/HeroSectorMarquee";
 import WhyAmanorXBenefits from "@/components/home/WhyAmanorXBenefits";
 import TodayTomorrowSection from "@/components/home/TodayTomorrowSection";
 import NewsCarousel from "@/components/home/NewsCarousel";
@@ -15,7 +16,12 @@ import { homeContent } from "@/content/home";
 import { emmicSteps } from "@/content/emmic";
 import { contactContent } from "@/content/contact";
 import { pick } from "@/lib/i18n";
-import { getLiveSectors, getSectorsByStatus, countSectorsByStatus } from "@/lib/data/sectors";
+import {
+  getAllSectors,
+  getLiveSectors,
+  getSectorsByStatus,
+  countSectorsByStatus,
+} from "@/lib/data/sectors";
 import { getAllPortfolioCompanies } from "@/lib/data/portfolioCompanies";
 import { SECTOR_STATUS } from "@/content/constants";
 
@@ -30,6 +36,14 @@ const liveSectors = getLiveSectors();
 const pipelineSectors = getSectorsByStatus(SECTOR_STATUS.PIPELINE);
 const plannedSectors = getSectorsByStatus(SECTOR_STATUS.PLANNED);
 const portfolioCompanies = getAllPortfolioCompanies();
+
+// Client component props must stay serializable -- pass only the fields the
+// hero mosaic renders, not the full registry entries.
+const heroSectors = getAllSectors().map(({ code, name, status }) => ({
+  code,
+  name,
+  status,
+}));
 
 export default function HomePage() {
   const [coreTier, ...otherTiers] = tierList;
@@ -66,7 +80,7 @@ export default function HomePage() {
           className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950 via-navy-950/70 to-navy-950/30"
         />
 
-        <div className="flex flex-1 flex-col justify-end px-6 pb-12 md:px-12 lg:px-16 lg:pb-16">
+        <div className="flex flex-1 flex-col justify-end px-6 pb-10 md:px-12 lg:px-16 lg:pb-12">
           <div>
             <AnimatedHeading
               text={content.hero.heading}
@@ -98,6 +112,13 @@ export default function HomePage() {
             </FadeIn>
           </div>
         </div>
+
+        {/* Sector slideshow -- an infinite logo-style marquee of the 16
+            EMMIC sectors (code + plain-language name) along the bottom of
+            the hero, fading in after the CTAs. See HeroSectorMarquee. */}
+        <FadeIn delay={1600} duration={1000}>
+          <HeroSectorMarquee sectors={heroSectors} />
+        </FadeIn>
       </section>
 
       {/* 2. About AmanorX -- same copy as before, restyled to a supplied

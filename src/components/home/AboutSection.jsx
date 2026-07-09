@@ -50,20 +50,10 @@ function StatCard({ index, value, text, image, alt, offset }) {
             style={{ backgroundColor: "rgba(240, 245, 247, 0.3)" }}
           />
           <div className={CARD_TEXT_POSITION[index % CARD_TEXT_POSITION.length]}>
-            <p
-              className="font-firs text-[36px] leading-none font-semibold uppercase sm:text-[52px]"
-              style={{
-                background: "linear-gradient(294deg, #185B7B 20%, #4BBDF0)",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
+            <p className="font-firs text-[36px] leading-none font-semibold uppercase text-navy-900 sm:text-[52px]">
               {value}
             </p>
-            <p className="mt-3 text-[14px] leading-[1.4]" style={{ color: "#154359" }}>
-              {text}
-            </p>
+            <p className="mt-3 text-[14px] leading-[1.4] text-navy-900">{text}</p>
           </div>
         </div>
       </div>

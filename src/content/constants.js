@@ -20,9 +20,9 @@ export const SECTOR_STATUS_LABEL = Object.freeze({
 export const SECTOR_STATUS_DESCRIPTION = Object.freeze({
   [SECTOR_STATUS.LIVE]: "Operating today with an active sector platform.",
   [SECTOR_STATUS.PIPELINE]:
-    "In active build-out; sector platform not yet public.",
+    "In active build-out toward full sector operations.",
   [SECTOR_STATUS.PLANNED]:
-    "Scoped within the group's sector roadmap; work has not started.",
+    "Scoped within the group's sector roadmap; build-out has not started.",
 });
 
 export function isValidSectorStatus(value) {

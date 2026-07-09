@@ -14,7 +14,6 @@ import { insightsContent } from "@/content/insights";
 import { portfolioContent } from "@/content/portfolio";
 import { getAllSectors } from "@/lib/data/sectors";
 import { getAllPortfolioCompanies } from "@/lib/data/portfolioCompanies";
-import { SECTOR_STATUS } from "@/content/constants";
 
 function pageEntries() {
   const siteContent = pick(site);
@@ -81,13 +80,13 @@ function pageEntries() {
 
 function sectorEntries() {
   return getAllSectors().map((sector) => {
-    const isLive = sector.status === SECTOR_STATUS.LIVE && Boolean(sector.url);
+    const hasSite = Boolean(sector.url);
     return {
       type: "Sector",
       title: `${sector.name} (${sector.code})`,
       description: sector.tagline,
-      href: isLive ? sector.url : "/sectors",
-      external: isLive,
+      href: hasSite ? sector.url : "/sectors",
+      external: hasSite,
     };
   });
 }

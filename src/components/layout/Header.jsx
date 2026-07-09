@@ -51,7 +51,7 @@ export default function Header() {
           </Link>
 
           <nav className="hidden xl:block" aria-label="Primary">
-            <ul className="flex items-center gap-6 text-sm">
+            <ul className="flex items-center gap-1 text-sm">
               {nav.map((item) => {
                 const active = pathname === item.href;
 
@@ -65,8 +65,10 @@ export default function Header() {
                         href={item.href}
                         aria-haspopup="true"
                         aria-current={active ? "page" : undefined}
-                        className={`flex items-center gap-1 transition-colors ${
-                          groupActive ? "text-green-400" : "text-white/80 hover:text-gray-300"
+                        className={`flex items-center gap-1 rounded-lg px-3 py-2 transition-colors ${
+                          groupActive
+                            ? "text-green-400"
+                            : "text-white/80 hover:bg-black/50 hover:text-green-400"
                         }`}
                       >
                         {item.label}
@@ -102,7 +104,7 @@ export default function Header() {
                                   className={`block px-4 py-2 whitespace-nowrap transition-colors ${
                                     childActive
                                       ? "text-green-400"
-                                      : "text-white/80 hover:bg-white/10 hover:text-green-400"
+                                      : "text-white/80 hover:bg-black/50 hover:text-green-400"
                                   }`}
                                 >
                                   {child.label}
@@ -120,7 +122,7 @@ export default function Header() {
                   <li key={item.href}>
                     {item.disabled ? (
                       <span
-                        className="block cursor-not-allowed text-white/40"
+                        className="block cursor-not-allowed rounded-lg px-3 py-2 text-white/40"
                         title="Coming soon"
                         aria-disabled="true"
                       >
@@ -130,8 +132,10 @@ export default function Header() {
                       <Link
                         href={item.href}
                         aria-current={active ? "page" : undefined}
-                        className={`block transition-colors ${
-                          active ? "text-green-400" : "text-white/80 hover:text-gray-300"
+                        className={`block rounded-lg px-3 py-2 transition-colors ${
+                          active
+                            ? "text-green-400"
+                            : "text-white/80 hover:bg-black/50 hover:text-green-400"
                         }`}
                       >
                         {item.label}
@@ -146,7 +150,7 @@ export default function Header() {
           <div className="flex items-center gap-2">
             <button
               type="button"
-              className="cursor-pointer rounded-full p-2 transition-colors hover:bg-white/10 hover:text-green-400"
+              className="cursor-pointer rounded-full p-2 transition-colors hover:bg-black/50 hover:text-green-400"
               aria-expanded={searchOpen}
               aria-controls={searchRowId}
               onClick={() => setSearchOpen((current) => !current)}
@@ -176,7 +180,7 @@ export default function Header() {
 
             <button
               type="button"
-              className="cursor-pointer rounded-full p-2 transition-colors hover:bg-white/10 hover:text-green-400 xl:hidden"
+              className="cursor-pointer rounded-full p-2 transition-colors hover:bg-black/50 hover:text-green-400 xl:hidden"
               aria-expanded={open}
               aria-controls={menuId}
               onClick={() => setOpen((current) => !current)}
@@ -276,7 +280,9 @@ export default function Header() {
                         href={item.href}
                         aria-current={active ? "page" : undefined}
                         className={`block rounded-lg px-2 py-2 transition-colors ${
-                          active ? "bg-white/10 text-green-400" : "hover:bg-white/5 hover:text-green-400"
+                          active
+                            ? "bg-black/50 text-green-400"
+                            : "hover:bg-black/50 hover:text-green-400"
                         }`}
                         onClick={() => setOpen(false)}
                       >
