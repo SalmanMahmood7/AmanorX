@@ -1,0 +1,18 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/architecture/page": "app/architecture/page.js",
+  "/careers/page": "app/careers/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/governance/page": "app/governance/page.js",
+  "/icon.svg/route": "app/icon.svg/route.js",
+  "/insights/page": "app/insights/page.js",
+  "/page": "app/page.js",
+  "/portfolio/page": "app/portfolio/page.js",
+  "/privacy-policy/page": "app/privacy-policy/page.js",
+  "/search/page": "app/search/page.js",
+  "/sectors/page": "app/sectors/page.js",
+  "/terms-and-conditions/page": "app/terms-and-conditions/page.js",
+  "/valuation-and-investors/page": "app/valuation-and-investors/page.js",
+  "/who-we-are/page": "app/who-we-are/page.js"
+}
