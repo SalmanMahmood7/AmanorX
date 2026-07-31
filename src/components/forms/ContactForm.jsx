@@ -162,7 +162,7 @@ export default function ContactForm({ presetReason, lockReason = false }) {
       <button
         type="submit"
         disabled={status === STATUS.SUBMITTING}
-        className="cursor-pointer rounded-lg bg-gold-500 px-6 py-2.5 text-sm font-medium text-navy-950 transition-colors hover:bg-gold-400 disabled:cursor-not-allowed disabled:opacity-60"
+        className="btn-gold-shimmer cursor-pointer rounded-lg px-6 py-2.5 text-sm font-medium text-navy-950 disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === STATUS.SUBMITTING ? "Sending..." : "Send message"}
       </button>

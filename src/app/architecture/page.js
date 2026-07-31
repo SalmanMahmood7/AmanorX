@@ -75,7 +75,7 @@ export default function ArchitecturePage() {
           stage, without the title column (the page introduces itself). */}
       <ArchitectureGlance content={profile.architectureGlance} showTitle={false} />
 
-      <section id="group-architecture" className="scroll-mt-28 bg-white py-16 sm:py-20">
+      <section id="group-architecture" className="scroll-mt-28 bg-navy-50 py-16 sm:py-20">
         <Container size="xl">
           <DeckSectionTitle title={content.heading} />
           <Reveal delay={120}>

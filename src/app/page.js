@@ -77,7 +77,7 @@ export default function HomePage() {
           on the facade) under the deck's gold serif motto ("Building
           Ecosystems. Empowering Generations."), gold kicker, gold primary
           CTA, and the sector ring on the right. */}
-      <section className="relative isolate flex h-screen w-full flex-col overflow-hidden bg-navy-950 text-white">
+      <section className="relative isolate flex min-h-[100svh] w-full flex-col overflow-x-hidden bg-navy-950 text-white">
         <img
           src="/images/hero-hq-night.jpg"
           alt=""
@@ -90,8 +90,8 @@ export default function HomePage() {
         />
 
         <div className="flex flex-1 items-center px-6 pb-10 pt-24 md:px-12 lg:px-16 lg:pb-12">
-          <div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-            <div>
+          <div className="grid w-full min-w-0 items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+            <div className="min-w-0">
               <FadeIn delay={100} duration={800}>
                 <p className="mb-4 flex items-center gap-3 text-xs font-bold tracking-[0.35em] text-gold-400 uppercase sm:text-sm">
                   <span className="h-px w-10 bg-gold-500" aria-hidden="true" />
@@ -101,7 +101,7 @@ export default function HomePage() {
 
               <AnimatedHeading
                 text={profile.hero.heading}
-                className="mb-4 text-4xl font-medium md:text-5xl lg:text-6xl xl:text-7xl"
+                className="mb-4 text-4xl font-medium md:text-5xl lg:text-5xl xl:text-5xl 2xl:text-6xl"
                 style={{ letterSpacing: "-0.01em" }}
               />
 
@@ -115,7 +115,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap gap-4">
                   <Link
                     href={profile.hero.cta.href}
-                    className="rounded-lg bg-gold-500 px-8 py-3 font-medium text-navy-950 transition-colors hover:bg-gold-400"
+                    className="btn-gold-shimmer rounded-lg px-8 py-3 font-medium text-navy-950"
                   >
                     {profile.hero.cta.label}
                   </Link>

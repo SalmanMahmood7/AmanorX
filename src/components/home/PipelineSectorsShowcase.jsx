@@ -18,7 +18,7 @@ export default function PipelineSectorsShowcase({
   progress,
 }) {
   return (
-    <section className="bg-background">
+    <section className="bg-navy-50">
       <Container size="xl" className="py-16 sm:py-24">
         <DeckHeading
           accentFirst

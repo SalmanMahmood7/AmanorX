@@ -14,7 +14,7 @@ import ProfileIcon from "./ProfileIcons";
  */
 export default function PortfolioWall({ content, companies }) {
   return (
-    <section className="bg-background">
+    <section className="bg-navy-50">
       <Container size="xl" className="py-16 sm:py-24">
         <Reveal className="text-center">
           <p className="flex items-center justify-center gap-3 text-xs font-bold tracking-[0.35em] text-gold-600 uppercase">

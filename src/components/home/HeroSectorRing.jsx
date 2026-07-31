@@ -55,7 +55,7 @@ export default function HeroSectorRing({ sectors }) {
   };
 
   return (
-    <div className="relative h-[32rem] w-[32rem] [--ring-radius:10.5rem] [perspective:1400px] xl:h-[36rem] xl:w-[36rem] xl:[--ring-radius:11.9rem]">
+    <div className="relative h-[min(32rem,60vh)] w-[min(32rem,60vh)] [--ring-radius:min(10.5rem,20vh)] [perspective:1400px] xl:h-[min(36rem,64vh)] xl:w-[min(36rem,64vh)] xl:[--ring-radius:min(11.9rem,21vh)]">
       <div
         className="relative h-full w-full"
         style={{ transform: `rotateX(${TILT_DEG}deg)` }}

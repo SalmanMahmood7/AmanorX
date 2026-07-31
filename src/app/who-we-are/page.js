@@ -53,7 +53,7 @@ export default function WhoWeArePage() {
       {/* Core belief as a single centered statement -- one sentence carries
           the whole section, so it's staged like one rather than boxed into
           a small card. */}
-      <section id="core-belief" className="scroll-mt-28 bg-white py-16 sm:py-24">
+      <section id="core-belief" className="scroll-mt-28 bg-navy-50 py-16 sm:py-24">
         <Container size="lg">
           <Reveal className="mx-auto max-w-3xl text-center">
             <p className="font-mono text-xs font-medium tracking-[0.2em] text-gold-600 uppercase">

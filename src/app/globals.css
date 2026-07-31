@@ -4,12 +4,9 @@
  * AmanorX brand tokens.
  * Navy/Gold per the 2026 company-profile design direction: deep navy
  * surfaces, warm ivory paper, and a gold accent ramp replacing the old
- * green. Gold shade roles:
- *   gold-400  bright gold for accents/text on dark navy surfaces
- *   gold-500  the primary brand gold (rules, buttons, borders)
- *   gold-600  AA-safe gold text on white/ivory surfaces
- *   gold-700  hover/pressed darkening of gold-600
- *   gold-50   pale gold tint for chips and soft backgrounds
+ * green. The gold-* scale is a single flat brand value (#c9a227) across
+ * every step -- kept as separate tokens only so existing gold-* utility
+ * classes don't need renaming, not because the shades differ.
  *
  * navy-50/100 are warm ivory tints (not pure navy tints anymore) so light
  * surfaces read as the deck's warm paper rather than a cool grey. Silver
@@ -24,11 +21,11 @@
   --color-navy-100: #e9e6dd;
   --color-navy-50: #f7f5ef;
 
-  --color-gold-700: #755710;
-  --color-gold-600: #8f6a14;
+  --color-gold-700: #c9a227;
+  --color-gold-600: #c9a227;
   --color-gold-500: #c9a227;
-  --color-gold-400: #e3c565;
-  --color-gold-50: #faf4e0;
+  --color-gold-400: #c9a227;
+  --color-gold-50: #c9a227;
 
   --color-silver-300: #e4e4e4;
   --color-silver-400: #c0c0c0;
@@ -159,6 +156,74 @@ body {
 .liquid-glass-button:hover {
   background: #ffffff;
   color: #000000;
+}
+
+/* Metallic gold sheen for the hero's primary CTA ("Explore the Sectors"):
+   a diagonal brand-gold gradient with a soft light beam that sweeps across
+   on a slow loop, then sweeps fast on hover. Kept as its own unlayered
+   class -- like .liquid-glass above -- so it reliably wins over a
+   Tailwind bg-gold-* utility.
+   The gold scale (gold-700..gold-50) is a single flat brand value now, so
+   the dark/bright bevel this needs to read as "metallic" is derived here
+   with color-mix() straight off gold-500 rather than off separate shade
+   tokens -- if the single brand gold value changes, this bevel follows it
+   automatically instead of drifting out of sync. The 0 0 rgba values are
+   gold-500 (#c9a227) in decimal RGB. */
+.btn-gold-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-gold-500) 70%, black) 0%,
+    color-mix(in srgb, var(--color-gold-500) 55%, white) 50%,
+    color-mix(in srgb, var(--color-gold-500) 75%, black) 100%
+  );
+  box-shadow: 0 4px 15px rgba(201, 162, 39, 0.25);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+.btn-gold-shimmer::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.75) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  animation: btn-gold-shine 4s infinite ease-in-out;
+  pointer-events: none;
+}
+.btn-gold-shimmer:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 162, 39, 0.45);
+}
+.btn-gold-shimmer:hover::before {
+  animation: btn-gold-shine-fast 0.8s ease-in-out;
+}
+
+@keyframes btn-gold-shine {
+  0% {
+    left: -75%;
+  }
+  20%,
+  100% {
+    left: 125%;
+  }
+}
+@keyframes btn-gold-shine-fast {
+  0% {
+    left: -75%;
+  }
+  100% {
+    left: 125%;
+  }
 }
 
 /* Scroll-reveal primitive used by <Reveal>. Only "pending" (pre-observation)

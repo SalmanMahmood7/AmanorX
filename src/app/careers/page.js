@@ -18,7 +18,7 @@ export const metadata = {
 export default function CareersPage() {
   return (
     <PageShell heading={content.heading} description={content.intro} bleed>
-      <section id="group-roles" className="scroll-mt-28 bg-white py-16 sm:py-24">
+      <section id="group-roles" className="scroll-mt-28 bg-navy-50 py-16 sm:py-24">
         <Container size="xl">
           <DeckSectionTitle title={content.groupRolesHeading} />
           <Reveal delay={120}>

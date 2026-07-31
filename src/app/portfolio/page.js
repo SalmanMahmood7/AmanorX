@@ -97,7 +97,7 @@ export default function PortfolioPage() {
         </Container>
       </section>
 
-      <section id="companies" className="scroll-mt-28 bg-white py-16 sm:py-20">
+      <section id="companies" className="scroll-mt-28 bg-navy-50 py-16 sm:py-20">
         <Container size="xl">
           <DeckSectionTitle title={content.directHeading} />
           <Reveal delay={120}>

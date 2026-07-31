@@ -71,7 +71,7 @@ export default function TodayTomorrowSection({
   ctaPortfolio,
 }) {
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section className="bg-navy-50 py-16 sm:py-20">
       <Container size="xl">
         {/* Bespoke centered heading for this section only -- skips the
             shared <SectionHeading>'s green tick rule and left alignment,

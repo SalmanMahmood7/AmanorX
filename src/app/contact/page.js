@@ -47,7 +47,7 @@ export default function ContactPage() {
         </Container>
       </section>
 
-      <section className="bg-white py-16 sm:py-20">
+      <section className="bg-navy-50 py-16 sm:py-20">
         <Container size="xl">
           <Reveal>
             <ContactPathTabs paths={content.paths} />

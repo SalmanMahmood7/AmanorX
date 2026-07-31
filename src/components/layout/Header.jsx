@@ -214,7 +214,7 @@ export default function Header() {
 
           <Link
             href="/contact"
-            className="hidden rounded-lg bg-gold-500 px-5 py-2 text-xs font-semibold tracking-[0.18em] text-navy-950 uppercase transition-colors hover:bg-gold-400 xl:block"
+            className="btn-gold-shimmer hidden rounded-lg px-5 py-2 text-xs font-semibold tracking-[0.18em] text-navy-950 uppercase xl:block"
           >
             Contact
           </Link>
@@ -287,7 +287,7 @@ export default function Header() {
             />
             <button
               type="submit"
-              className="cursor-pointer rounded-lg bg-gold-500 px-4 py-1.5 text-sm font-medium text-navy-950 transition-colors hover:bg-gold-400"
+              className="btn-gold-shimmer cursor-pointer rounded-lg px-4 py-1.5 text-sm font-medium text-navy-950"
             >
               Search
             </button>

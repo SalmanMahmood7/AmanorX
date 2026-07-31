@@ -19,9 +19,9 @@ export function Emblem({ className }) {
     >
       <defs>
         <linearGradient id="amx-gold" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#efd88d" />
+          <stop offset="0" stopColor="#c9a227" />
           <stop offset="0.5" stopColor="#c9a227" />
-          <stop offset="1" stopColor="#8f6a14" />
+          <stop offset="1" stopColor="#c9a227" />
         </linearGradient>
       </defs>
 

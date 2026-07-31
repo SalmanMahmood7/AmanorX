@@ -11,7 +11,7 @@ import ProfileIcon from "./ProfileIcons";
  */
 export default function EmmicFramework({ content }) {
   return (
-    <section className="bg-background">
+    <section className="bg-navy-50">
       <Container size="xl" className="py-16 sm:py-24">
         <DeckHeading
           plain={content.headingPlain}
@@ -48,7 +48,7 @@ export default function EmmicFramework({ content }) {
 
         {/* Quote band. */}
         <Reveal className="mt-16">
-          <figure className="rounded-t-[2.5rem] rounded-b-lg border-t-2 border-gold-500 bg-navy-950 px-6 py-12 text-center text-white sm:px-12">
+          <figure className="rounded-[2.5rem] border-t-2 border-gold-500 bg-navy-950 px-6 py-12 text-center text-white sm:px-12">
             <span
               aria-hidden="true"
               className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-gold-500/60 font-display text-2xl leading-none text-gold-400"

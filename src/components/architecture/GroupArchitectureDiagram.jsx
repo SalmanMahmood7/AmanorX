@@ -103,7 +103,7 @@ export default function GroupArchitectureDiagram({
         className="rounded-lg border border-gold-500/30 bg-gold-50 px-6 py-6 text-center"
       >
         <p className="font-semibold text-navy-900">{content.governanceBand.heading}</p>
-        <p className="mt-1 text-xs tracking-wide text-gold-700 uppercase">
+        <p className="mt-1 text-xs tracking-wide text-navy-700 uppercase">
           {content.governanceBand.tagline}
         </p>
         <ul className="mt-4 flex flex-wrap justify-center gap-2">

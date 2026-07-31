@@ -6,7 +6,7 @@ import {
 
 const STYLES = {
   [SECTOR_STATUS.LIVE]:
-    "bg-gold-50 text-gold-600 ring-1 ring-inset ring-gold-500/25",
+    "bg-gold-50 text-navy-950 ring-1 ring-inset ring-navy-950/20",
   [SECTOR_STATUS.PIPELINE]:
     "bg-silver-300/40 text-silver-ink ring-1 ring-inset ring-silver-ink/25",
   [SECTOR_STATUS.PLANNED]:

@@ -87,7 +87,7 @@ export default function GovernancePage() {
 
       {/* Group-level only, per the ring-fencing rule -- the dashed border
           is the ring fence, drawn. See src/content/governance.js. */}
-      <section id="foundation" className="scroll-mt-28 bg-white py-16 sm:py-20">
+      <section id="foundation" className="scroll-mt-28 bg-navy-50 py-16 sm:py-20">
         <Container size="xl">
           <Reveal>
             <div className="rounded-lg border-2 border-dashed border-gold-500/40 bg-navy-50/60 p-8 sm:p-10">

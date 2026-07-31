@@ -124,7 +124,7 @@ export default function NewsCarousel({ heading, description, cta }) {
   }
 
   return (
-    <section className="bg-white py-16 sm:py-20">
+    <section className="bg-navy-50 py-16 sm:py-20">
       <Container size="xl">
         <Reveal className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const VARIANTS = {
-  primary: "bg-gold-500 text-navy-950 hover:bg-gold-400 focus-visible:outline-gold-600",
+  primary: "btn-gold-shimmer text-navy-950 focus-visible:outline-gold-600",
   outlineOnDark:
     "border border-white/30 text-white hover:border-gold-400 hover:text-gold-400 focus-visible:outline-gold-400",
   outlineOnLight:

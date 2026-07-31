@@ -34,7 +34,7 @@ const CORE_VALUES_CLIP = `polygon(
 )`;
 export default function VisionMissionSection({ content }) {
   return (
-    <section className="bg-background">
+    <section className="bg-navy-50">
       <Container size="xl" className="pt-16 pb-12 sm:pt-24 sm:pb-16">
         <DeckHeading
           plain="Vision ·"

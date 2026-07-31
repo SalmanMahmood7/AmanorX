@@ -214,7 +214,7 @@ export default function ProjectsCaseStudies() {
   const headerInView = useInView(headerRef, { once: true, margin: "-60px" });
 
   return (
-    <section className={`relative bg-white text-black ${dmSans.className}`}>
+    <section className={`relative bg-navy-50 text-black ${dmSans.className}`}>
       {/* Header (sits below the page hero, so no extra header clearance) */}
       <div className="relative px-6 pb-10 pt-16 sm:px-10 lg:px-16 lg:pt-24">
         <motion.div
